@@ -1,5 +1,45 @@
 (function () {
     "use strict";
+
+    var STUDIO_ORIGIN = "https://everythingburger.studio";
+    var SHOP_ORIGIN = "https://everything-burger.petercsnowden.workers.dev";
+
+    function isLocalHost() {
+        var host = window.location.hostname;
+        return host === "localhost" || host === "127.0.0.1" || host === "[::1]";
+    }
+
+    function isStudioHost(host) {
+        return host === "everythingburger.studio" ||
+            host === "www.everythingburger.studio" ||
+            /\.github\.io$/i.test(host);
+    }
+
+    function isWorkerHost(host) {
+        return /\.workers\.dev$/i.test(host);
+    }
+
+    function bounceToCanonicalHost() {
+        if (isLocalHost()) {
+            return;
+        }
+
+        var host = window.location.hostname;
+        var path = window.location.pathname || "/";
+        var rest = path + window.location.search + window.location.hash;
+
+        if (isStudioHost(host) && path.indexOf("/shop/") === 0) {
+            window.location.replace(SHOP_ORIGIN + rest);
+            return;
+        }
+
+        if (isWorkerHost(host) && path.indexOf("/shop/") !== 0 && path.indexOf("/api/") !== 0) {
+            window.location.replace(STUDIO_ORIGIN + rest);
+        }
+    }
+
+    bounceToCanonicalHost();
+
     var NAV_STACK_LAYOUT = {
         startPercent: 0,
         heights: [26, 20, 19, 18, 17]
@@ -7,12 +47,10 @@
 
     var NAV_LINKS = [
         { label: " ", static: true },
-        { label: "Home", page: "index.html", home: true },
-        { label: "About Me", page: "about/about.html" },
-        { label: "Gallery", page: "gallery/gallery.html" },
-
-    // shop/shop.html goes here!
-        { label: "Shop", page: "https://everything-burger.petercsnowden.workers.dev/shop/shop.html" }
+        { label: "Home", page: "/index.html" },
+        { label: "About Me", page: "/about/about.html" },
+        { label: "Gallery", page: "/gallery/gallery.html" },
+        { label: "Shop", page: "/shop/shop.html", shop: true }
     ];
 
     function getRootPrefix() {
@@ -25,15 +63,14 @@
         return "/";
     }
 
-    function isAbsoluteUrl(url) {
-        return /^https?:\/\//i.test(url);
-    }
-
-    function navHref(link, prefix) {
-        if (isAbsoluteUrl(link.page)) {
+    function navHref(link) {
+        if (link.shop) {
+            return SHOP_ORIGIN + "/shop/shop.html";
+        }
+        if (isLocalHost()) {
             return link.page;
         }
-        return prefix + link.page;
+        return STUDIO_ORIGIN + link.page;
     }
 
     function buildNavMenu(prefix) {
@@ -75,7 +112,7 @@
             slot.style.setProperty("--nav-slot-height", NAV_STACK_LAYOUT.heights[index] + "%");
 
             if (!link.static) {
-                slot.href = navHref(link, prefix);
+                slot.href = navHref(link);
             }
 
             slot.textContent = link.label;
