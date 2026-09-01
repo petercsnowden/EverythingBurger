@@ -26,6 +26,10 @@
         return parts.length ? parts.join("/") + "/" : "";
     }
 
+    function isAbsoluteUrl(url) {
+        return /^https?:\/\//i.test(url);
+    }
+
     function buildNavMenu(prefix) {
         var nav = document.createElement("nav");
         nav.className = "nav-menu";
@@ -65,7 +69,9 @@
             slot.style.setProperty("--nav-slot-height", NAV_STACK_LAYOUT.heights[index] + "%");
 
             if (!link.static) {
-                if (link.home && !prefix) {
+                if (isAbsoluteUrl(link.page)) {
+                    slot.href = link.page;
+                } else if (link.home && !prefix) {
                     slot.href = "#";
                 } else {
                     slot.href = prefix + link.page;
