@@ -357,13 +357,8 @@ function tryUnstick() {
   const z = SPAWN_POSITION.z + Math.sin(angle) * radius;
   const hit = raycastDown(x, z, SPAWN_POSITION.y + 20 + unstickAttempts * 5, collider);
   if (hit) {
-    const clearance = measureClearance(x, hit.y + 0.05, z, collider);
-    if (clearance < 0.15) {
-      SPAWN_POSITION.set(x, hit.y + 0.05, z);
-      console.log(`Unstick attempt ${unstickAttempts}: moved to`, SPAWN_POSITION.clone(), `(clear)`);
-    } else {
-      console.log(`Unstick attempt ${unstickAttempts}: found floor but too wedged (push=${clearance.toFixed(3)}), trying next.`);
-    }
+    SPAWN_POSITION.set(x, hit.y + 0.05, z);
+    console.log(`Unstick attempt ${unstickAttempts}: moved to`, SPAWN_POSITION.clone());
   } else {
     console.log(`Unstick attempt ${unstickAttempts}: no floor found at that offset, staying put.`);
   }
@@ -407,12 +402,7 @@ function findGroundedSpawn(collidableMeshes, collider) {
   for (const [dx, dz] of offsets) {
     const hit = raycastDown(center.x + dx, center.z + dz, startY, collider);
     if (hit) {
-      const candidate = new THREE.Vector3(center.x + dx, hit.y + 0.05, center.z + dz);
-      const clearance = measureClearance(candidate.x, candidate.y, candidate.z, collider);
-      if (clearance < 0.15) {
-        return candidate;
-      }
-      console.log(`Spawn candidate at (${candidate.x.toFixed(1)}, ${candidate.z.toFixed(1)}) rejected — too wedged (push=${clearance.toFixed(3)})`);
+      return new THREE.Vector3(center.x + dx, hit.y + 0.05, center.z + dz);
     }
   }
   return null;
@@ -534,37 +524,29 @@ const tempVecA = new THREE.Vector3();
 const tempVecB = new THREE.Vector3();
 const tempVecC = new THREE.Vector3();
 
-function computeCollisionPush(segment, collider) {
+function resolveCollisions() {
+  if (!collider) return;
+
   tempBox.makeEmpty();
-  tempBox.expandByPoint(segment.start);
-  tempBox.expandByPoint(segment.end);
+  tempSegment.copy(playerCollider);
+
+  tempBox.expandByPoint(tempSegment.start);
+  tempBox.expandByPoint(tempSegment.end);
   tempBox.min.addScalar(-CAPSULE_RADIUS);
   tempBox.max.addScalar(CAPSULE_RADIUS);
-
-  const totalPush = new THREE.Vector3();
 
   collider.geometry.boundsTree.shapecast({
     intersectsBounds: (box) => box.intersectsBox(tempBox),
     intersectsTriangle: (tri) => {
-      const distance = tri.closestPointToSegment(segment, tempVecA, tempVecB);
+      const distance = tri.closestPointToSegment(tempSegment, tempVecA, tempVecB);
       if (distance < CAPSULE_RADIUS) {
         const depth = CAPSULE_RADIUS - distance;
         const direction = tempVecB.sub(tempVecA).normalize();
-        segment.start.addScaledVector(direction, depth);
-        segment.end.addScaledVector(direction, depth);
-        totalPush.addScaledVector(direction, depth);
+        tempSegment.start.addScaledVector(direction, depth);
+        tempSegment.end.addScaledVector(direction, depth);
       }
     }
   });
-
-  return totalPush;
-}
-
-function resolveCollisions() {
-  if (!collider) return;
-
-  tempSegment.copy(playerCollider);
-  const totalPush = computeCollisionPush(tempSegment, collider);
 
   const deltaVector = tempVecC.subVectors(tempSegment.start, playerCollider.start);
   playerOnGround = deltaVector.y > Math.abs(0.02);
@@ -574,24 +556,6 @@ function resolveCollisions() {
 
   playerCollider.start.add(deltaVector);
   playerCollider.end.add(deltaVector);
-
-  return totalPush.length();
-}
-
-// Checks how "wedged" a candidate spawn point is by measuring the total
-// collision-correction magnitude across a few resolution passes — a clean
-// open spot should settle to near-zero push after one or two passes; a
-// candidate buried in overlapping clutter keeps getting shoved hard.
-function measureClearance(x, y, z, collider) {
-  const testSeg = new THREE.Line3(
-    new THREE.Vector3(x, y + CAPSULE_RADIUS, z),
-    new THREE.Vector3(x, y + CAPSULE_HEIGHT - CAPSULE_RADIUS, z)
-  );
-  let totalPush = 0;
-  for (let i = 0; i < 3; i++) {
-    totalPush += computeCollisionPush(testSeg, collider).length();
-  }
-  return totalPush;
 }
 
 // ---------- Movement loop ----------
