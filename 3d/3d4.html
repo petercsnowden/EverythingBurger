@@ -398,7 +398,6 @@ loader.setDRACOLoader(dracoLoader);
 loader.load(
   MODEL_URL,
   (gltf) => {
-    console.log('Model loaded successfully.');
     const model = gltf.scene;
     model.updateMatrixWorld(true);
 
@@ -433,10 +432,6 @@ loader.load(
       if (excludedMeshes.length) {
         console.log('Excluded from collision (likely background/skybox):', excludedMeshes);
       }
-      console.log(`Building collider from ${collidableMeshes.length} meshes...`);
-      if (collidableMeshes.length === 0) {
-        throw new Error('No collidable meshes found — everything was taller than BACKGROUND_HEIGHT_THRESHOLD.');
-      }
 
       const staticGen = new StaticGeometryGenerator(collidableMeshes);
       staticGen.attributes = ['position'];
@@ -446,7 +441,6 @@ loader.load(
       collider = new THREE.Mesh(mergedGeometry);
       collider.visible = false;
       scene.add(collider);
-      console.log('Collider built successfully.');
 
       // Find real ground: raycast down through the collider from above the
       // center of the normal-scale geometry, fanning out to nearby points
@@ -464,8 +458,6 @@ loader.load(
         }
       }
       resetPlayer();
-      console.log('Spawn position set to:', SPAWN_POSITION.clone());
-      coordsHud.classList.add('visible'); // shown by default for now — press C to hide
 
       loadingWrap.style.opacity = '0';
       loadingLabel.style.opacity = '0';
