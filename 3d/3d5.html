@@ -170,7 +170,7 @@
 <div id="crosshair"></div>
 <div id="loading-label">Loading environment…</div>
 <div id="loading-bar-wrap"><div id="loading-bar"></div></div>
-<div id="reset-hint">Stuck? Press <b style="color:#fff">R</b> repeatedly to try nearby spots</div>
+<div id="reset-hint">Stuck? Press <b style="color:#fff">R</b> to reset your position</div>
 <div id="coords-hud"></div>
 
 <div id="overlay">
@@ -310,7 +310,7 @@ document.addEventListener('keydown', (e) => {
     case 'KeyD': case 'ArrowRight': move.right = true; break;
     case 'ShiftLeft': case 'ShiftRight': move.sprint = true; break;
     case 'Space': wantsJump = true; break;
-    case 'KeyR': tryUnstick(); break;
+    case 'KeyR': resetPlayer(); break;
     case 'KeyC': coordsHud.classList.toggle('visible'); break;
   }
 });
@@ -342,26 +342,6 @@ function resetPlayer() {
   camera.position.copy(playerCollider.end);
 }
 resetPlayer();
-
-let unstickAttempts = 0;
-function tryUnstick() {
-  if (!collider) { resetPlayer(); return; }
-  unstickAttempts++;
-  // Widen the search radius a bit more each press, and lift higher each
-  // time too, in case the last spot was buried inside clutter.
-  const radius = 3 + unstickAttempts * 4;
-  const angle = unstickAttempts * 2.4; // spread attempts around a circle
-  const x = SPAWN_POSITION.x + Math.cos(angle) * radius;
-  const z = SPAWN_POSITION.z + Math.sin(angle) * radius;
-  const hit = raycastDown(x, z, SPAWN_POSITION.y + 20 + unstickAttempts * 5, collider);
-  if (hit) {
-    SPAWN_POSITION.set(x, hit.y + 0.05, z);
-    console.log(`Unstick attempt ${unstickAttempts}: moved to`, SPAWN_POSITION.clone());
-  } else {
-    console.log(`Unstick attempt ${unstickAttempts}: no floor found at that offset, staying put.`);
-  }
-  resetPlayer();
-}
 
 // ---------- Auto floor-finding ----------
 // Casts a ray straight down through the collider from high above the given
@@ -561,7 +541,6 @@ const clock = new THREE.Clock();
 const forwardVec = new THREE.Vector3();
 const rightVec = new THREE.Vector3();
 const moveVec = new THREE.Vector3();
-let debugLogTimer = 0;
 
 function updatePlayer(dt) {
   // Gravity
@@ -599,22 +578,8 @@ function updatePlayer(dt) {
     playerCollider.end.add(moveVec);
   }
 
-  const beforeCollision = playerCollider.start.clone();
-
   // Push the capsule out of any geometry it now overlaps
   for (let i = 0; i < 3; i++) resolveCollisions();
-
-  // Throttled diagnostic: how far did collision resolution push us back,
-  // relative to how far we tried to move? A large "pushback" close to the
-  // size of "attempted" every frame means the capsule is wedged in geometry.
-  debugLogTimer += dt;
-  if (debugLogTimer > 1 && controls.isLocked) {
-    debugLogTimer = 0;
-    const pushback = playerCollider.start.distanceTo(beforeCollision);
-    console.log(
-      `move input: ${moveVec.length().toFixed(4)}  |  collision pushback: ${pushback.toFixed(4)}  |  onGround: ${playerOnGround}`
-    );
-  }
 
   // Fell out of the world — send back to spawn
   if (playerCollider.end.y < -50) {
