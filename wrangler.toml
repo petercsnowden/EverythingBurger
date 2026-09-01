@@ -13,7 +13,8 @@ html_handling = "none"
 
 
 [vars]
-PUBLIC_BASE_URL = "https://everything-burger.petercsnowden.workers.dev"
+PUBLIC_BASE_URL = "https://everythingburger.studio"
+routes = [{ pattern = "everythingburger.studio", custom_domain = true }]
 CURRENCY = "usd"
 SHIPPING_CENTS = "800"
 MAX_QTY_PER_LINE = "20"
