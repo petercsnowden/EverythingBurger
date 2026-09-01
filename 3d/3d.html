@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Everything Burger — 3D Experience</title>
+<style>
+  :root {
+    --accent: #FF6031;
+    --sky: #95D4F0;
+    --ink: #000000;
+  }
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--ink);
+    overflow: hidden;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  canvas { display: block; }
+
+  #crosshair {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    background: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s ease;
+    z-index: 5;
+  }
+  #crosshair.visible { opacity: 0.9; }
+
+  #overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    z-index: 10;
+    cursor: pointer;
+    transition: opacity .35s ease;
+  }
+  #overlay.hidden { opacity: 0; pointer-events: none; }
+
+  #overlay-card {
+    text-align: center;
+    color: #fff;
+    max-width: 360px;
+    padding: 0 24px;
+  }
+  #overlay-card h1 {
+    font-size: 28px;
+    margin: 0 0 12px;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  #overlay-card p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 6px 0;
+    color: #cfcfcf;
+  }
+  #overlay-card .key {
+    display: inline-block;
+    padding: 2px 7px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #fff;
+    margin: 0 2px;
+  }
+  #enter-btn {
+    margin-top: 22px;
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #back-link {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 8;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    background: rgba(0,0,0,0.45);
+    padding: 8px 14px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  #back-link.visible { opacity: 1; }
+
+  #loading-bar-wrap {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    z-index: 10;
+  }
+  #loading-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width .2s ease;
+  }
+  #loading-label {
+    position: fixed;
+    bottom: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #888;
+    font-size: 12px;
+    z-index: 10;
+  }
+
+  #reset-hint {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.55);
+    font-size: 12px;
+    z-index: 8;
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  #reset-hint.visible { opacity: 1; }
+
+  #coords-hud {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    z-index: 8;
+    color: rgba(255,255,255,0.65);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    background: rgba(0,0,0,0.4);
+    padding: 8px 12px;
+    border-radius: 8px;
+    line-height: 1.5;
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+  }
+  #coords-hud.visible { opacity: 1; }
+</style>
+</head>
+<body>
+
+<a id="back-link" href="../index.html">&larr; Back</a>
+<div id="crosshair"></div>
+<div id="loading-label">Loading environment…</div>
+<div id="loading-bar-wrap"><div id="loading-bar"></div></div>
+<div id="reset-hint">Stuck? Press <b style="color:#fff">R</b> to reset your position</div>
+<div id="coords-hud"></div>
+
+<div id="overlay">
+  <div id="overlay-card">
+    <h1>Step inside</h1>
+    <p>Move with <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span></p>
+    <p>Look around with your mouse &middot; <span class="key">Space</span> to jump</p>
+    <p>Press <span class="key">Esc</span> anytime to get your cursor back</p>
+    <p>Press <span class="key">C</span> to show live coordinates</p>
+    <button id="enter-btn">Enter</button>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+    "three-mesh-bvh": "https://unpkg.com/three-mesh-bvh@0.9.14/build/index.module.js"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+import {
+  MeshBVH,
+  StaticGeometryGenerator,
+  computeBoundsTree,
+  disposeBoundsTree,
+  acceleratedRaycast
+} from 'three-mesh-bvh';
+
+THREE.BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
+THREE.BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
+THREE.Mesh.prototype.raycast = acceleratedRaycast;
+
+// ---------- CONFIG ----------
+const MODEL_URL = '../assets/3d%20models/museumd2-optimized.glb';
+
+// Filled in automatically once the model loads and the floor is located.
+// Starts as a generic fallback in case auto-detection ever fails entirely.
+const SPAWN_POSITION = new THREE.Vector3(0, 500, 0);
+
+// MANUAL OVERRIDE: once you've walked to the spot you actually want to
+// spawn at (press C to show live coordinates in the bottom-right corner),
+// paste those x/y/z numbers in here and auto-detection will be skipped
+// entirely. Leave as null to keep using the automatic floor-finder.
+const MANUAL_SPAWN_OVERRIDE = null; // e.g. new THREE.Vector3(-12.4, 1.8, 6.1);
+
+const WALK_SPEED = 3.4;       // meters/second
+const SPRINT_MULT = 1.8;
+const CAPSULE_RADIUS = 0.35;
+const CAPSULE_HEIGHT = 1.7;   // feet to top of head
+const GRAVITY = 22;
+const JUMP_SPEED = 7.2;
+
+// Meshes taller than this (world-space bounding box Y size) are treated as
+// background/skybox geometry: excluded from collision AND from the spawn
+// search, so a big dome or backdrop plane can't block you or get mistaken
+// for the floor. Tune this if your real geometry ever legitimately exceeds
+// it, or if your skybox is unusually short.
+const BACKGROUND_HEIGHT_THRESHOLD = 1000;
+
+const overlay = document.getElementById('overlay');
+const enterBtn = document.getElementById('enter-btn');
+const crosshair = document.getElementById('crosshair');
+const backLink = document.getElementById('back-link');
+const resetHint = document.getElementById('reset-hint');
+const coordsHud = document.getElementById('coords-hud');
+const loadingBar = document.getElementById('loading-bar');
+const loadingLabel = document.getElementById('loading-label');
+const loadingWrap = document.getElementById('loading-bar-wrap');
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
+scene.fog = new THREE.Fog(0x000000, 30, 110);
+
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.05, 500);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
+
+scene.add(new THREE.HemisphereLight(0xbdd7ff, 0x1a1a1a, 0.9));
+const sun = new THREE.DirectionalLight(0xffffff, 1.3);
+sun.position.set(8, 14, 6);
+scene.add(sun);
+
+// ---------- Controls ----------
+const controls = new PointerLockControls(camera, document.body);
+
+const move = { forward: false, backward: false, left: false, right: false, sprint: false };
+let wantsJump = false;
+
+enterBtn.addEventListener('click', () => controls.lock());
+overlay.addEventListener('click', (e) => { if (e.target === overlay) controls.lock(); });
+
+controls.addEventListener('lock', () => {
+  overlay.classList.add('hidden');
+  crosshair.classList.add('visible');
+  backLink.classList.remove('visible');
+  resetHint.classList.add('visible');
+});
+controls.addEventListener('unlock', () => {
+  overlay.classList.remove('hidden');
+  crosshair.classList.remove('visible');
+  backLink.classList.add('visible');
+  resetHint.classList.remove('visible');
+});
+
+document.addEventListener('pointerlockerror', () => {
+  console.error('Pointer Lock failed to engage.');
+  loadingWrap.style.opacity = '0';
+  loadingLabel.style.opacity = '1';
+  loadingLabel.textContent = 'Mouse lock blocked — this page needs to run from a real server (not a double-clicked file). See console.';
+  console.warn(
+    'Pointer Lock usually fails when a page is opened directly from disk (a file:// URL). ' +
+    'Serve this folder over http/https instead — e.g. run `npx serve` in the folder, ' +
+    'use VS Code\'s "Live Server" extension, or just test it on GitHub Pages once pushed.'
+  );
+});
+
+document.addEventListener('keydown', (e) => {
+  switch (e.code) {
+    case 'KeyW': case 'ArrowUp': move.forward = true; break;
+    case 'KeyS': case 'ArrowDown': move.backward = true; break;
+    case 'KeyA': case 'ArrowLeft': move.left = true; break;
+    case 'KeyD': case 'ArrowRight': move.right = true; break;
+    case 'ShiftLeft': case 'ShiftRight': move.sprint = true; break;
+    case 'Space': wantsJump = true; break;
+    case 'KeyR': resetPlayer(); break;
+    case 'KeyC': coordsHud.classList.toggle('visible'); break;
+  }
+});
+document.addEventListener('keyup', (e) => {
+  switch (e.code) {
+    case 'KeyW': case 'ArrowUp': move.forward = false; break;
+    case 'KeyS': case 'ArrowDown': move.backward = false; break;
+    case 'KeyA': case 'ArrowLeft': move.left = false; break;
+    case 'KeyD': case 'ArrowRight': move.right = false; break;
+    case 'ShiftLeft': case 'ShiftRight': move.sprint = false; break;
+  }
+});
+
+// ---------- Player capsule ----------
+// The capsule is a vertical line segment (start = feet, end = head) with a
+// radius. We move this segment through the world, then push it back out of
+// any triangle it overlaps in the collision mesh.
+const playerCollider = new THREE.Line3(
+  new THREE.Vector3(0, CAPSULE_RADIUS, 0),
+  new THREE.Vector3(0, CAPSULE_HEIGHT - CAPSULE_RADIUS, 0)
+);
+const playerVelocity = new THREE.Vector3();
+let playerOnGround = false;
+
+function resetPlayer() {
+  playerCollider.start.set(SPAWN_POSITION.x, SPAWN_POSITION.y + CAPSULE_RADIUS, SPAWN_POSITION.z);
+  playerCollider.end.set(SPAWN_POSITION.x, SPAWN_POSITION.y + CAPSULE_HEIGHT - CAPSULE_RADIUS, SPAWN_POSITION.z);
+  playerVelocity.set(0, 0, 0);
+  camera.position.copy(playerCollider.end);
+}
+resetPlayer();
+
+// ---------- Auto floor-finding ----------
+// Casts a ray straight down through the collider from high above the given
+// point. Returns the world-space hit point, or null if nothing was hit.
+function raycastDown(x, z, fromY, collider) {
+  const raycaster = new THREE.Raycaster();
+  raycaster.far = 100000;
+  raycaster.set(new THREE.Vector3(x, fromY, z), new THREE.Vector3(0, -1, 0));
+  const hits = raycaster.intersectObject(collider, false);
+  return hits.length ? hits[0].point : null;
+}
+
+// Finds a safe spawn point by looking at the center of "normal scale"
+// geometry (already filtered to exclude background/skybox meshes) and
+// raycasting down through the real collision mesh. If the center point
+// happens to land in open space (e.g. a courtyard), it fans out to nearby
+// offsets until it finds solid ground.
+function findGroundedSpawn(collidableMeshes, collider) {
+  if (!collidableMeshes.length) return null;
+
+  const box = new THREE.Box3();
+  collidableMeshes.forEach((mesh) => box.expandByObject(mesh));
+  if (box.isEmpty()) return null;
+
+  const center = box.getCenter(new THREE.Vector3());
+  const startY = box.max.y + Math.max(10, box.getSize(new THREE.Vector3()).y * 0.25);
+  const spread = Math.max(box.getSize(new THREE.Vector3()).x, box.getSize(new THREE.Vector3()).z) * 0.15;
+
+  const offsets = [
+    [0, 0],
+    [spread, 0], [-spread, 0], [0, spread], [0, -spread],
+    [spread, spread], [-spread, -spread], [spread, -spread], [-spread, spread],
+    [spread * 2, 0], [-spread * 2, 0], [0, spread * 2], [0, -spread * 2],
+  ];
+
+  for (const [dx, dz] of offsets) {
+    const hit = raycastDown(center.x + dx, center.z + dz, startY, collider);
+    if (hit) {
+      return new THREE.Vector3(center.x + dx, hit.y + 0.05, center.z + dz);
+    }
+  }
+  return null;
+}
+
+// ---------- Load model + build collision BVH ----------
+let collider = null;
+
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath('https://unpkg.com/three@0.160.0/examples/jsm/libs/draco/');
+
+const loader = new GLTFLoader();
+loader.setDRACOLoader(dracoLoader);
+
+loader.load(
+  MODEL_URL,
+  (gltf) => {
+    const model = gltf.scene;
+    model.updateMatrixWorld(true);
+
+    model.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+    scene.add(model);
+
+    // Merge collidable meshes into one static collision geometry and build
+    // a BVH over it, so the player can collide with everything at normal
+    // room scale — walls, floors, furniture, frames. Meshes far taller than
+    // the rest of the scene (skyboxes, backdrops) are excluded: they'd
+    // otherwise bloat the collider and can trap the player against their
+    // interior surface.
+    try {
+      const collidableMeshes = [];
+      const excludedMeshes = [];
+      model.traverse((child) => {
+        if (!child.isMesh) return;
+        const box = new THREE.Box3().setFromObject(child);
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        if (size.y > BACKGROUND_HEIGHT_THRESHOLD) {
+          excludedMeshes.push(child.name || '(unnamed)');
+        } else {
+          collidableMeshes.push(child);
+        }
+      });
+      if (excludedMeshes.length) {
+        console.log('Excluded from collision (likely background/skybox):', excludedMeshes);
+      }
+
+      const staticGen = new StaticGeometryGenerator(collidableMeshes);
+      staticGen.attributes = ['position'];
+      const mergedGeometry = staticGen.generate();
+      mergedGeometry.boundsTree = new MeshBVH(mergedGeometry, { lazyGeneration: false });
+
+      collider = new THREE.Mesh(mergedGeometry);
+      collider.visible = false;
+      scene.add(collider);
+
+      // Find real ground: raycast down through the collider from above the
+      // center of the normal-scale geometry, fanning out to nearby points
+      // if the first try misses (e.g. center lands in open space). Skipped
+      // entirely if you've set MANUAL_SPAWN_OVERRIDE above.
+      if (MANUAL_SPAWN_OVERRIDE) {
+        const snapped = raycastDown(MANUAL_SPAWN_OVERRIDE.x, MANUAL_SPAWN_OVERRIDE.z, MANUAL_SPAWN_OVERRIDE.y + 50, collider);
+        SPAWN_POSITION.copy(snapped ? new THREE.Vector3(MANUAL_SPAWN_OVERRIDE.x, snapped.y + 0.05, MANUAL_SPAWN_OVERRIDE.z) : MANUAL_SPAWN_OVERRIDE);
+      } else {
+        const foundSpawn = findGroundedSpawn(collidableMeshes, collider);
+        if (foundSpawn) {
+          SPAWN_POSITION.copy(foundSpawn);
+        } else {
+          console.warn('Could not auto-locate a floor — using fallback spawn. Press R in-scene to retry after moving, or adjust SPAWN_POSITION manually.');
+        }
+      }
+      resetPlayer();
+
+      loadingWrap.style.opacity = '0';
+      loadingLabel.style.opacity = '0';
+    } catch (colliderErr) {
+      console.error('Collision setup failed — walking through geometry until this is fixed:', colliderErr);
+      loadingWrap.style.opacity = '0';
+      loadingLabel.textContent = 'Loaded, but collision setup failed — check browser console.';
+    }
+  },
+  (xhr) => {
+    if (xhr.lengthComputable) {
+      const pct = Math.round((xhr.loaded / xhr.total) * 100);
+      loadingBar.style.width = pct + '%';
+      loadingLabel.textContent = `Loading environment… ${pct}%`;
+    }
+  },
+  (err) => {
+    console.error('Failed to load model:', err);
+    loadingLabel.textContent = 'Could not load environment — check the file path.';
+  }
+);
+
+// ---------- Resize ----------
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ---------- Collision resolution ----------
+const tempBox = new THREE.Box3();
+const tempSegment = new THREE.Line3();
+const tempVecA = new THREE.Vector3();
+const tempVecB = new THREE.Vector3();
+const tempVecC = new THREE.Vector3();
+
+function resolveCollisions() {
+  if (!collider) return;
+
+  tempBox.makeEmpty();
+  tempSegment.copy(playerCollider);
+
+  tempBox.expandByPoint(tempSegment.start);
+  tempBox.expandByPoint(tempSegment.end);
+  tempBox.min.addScalar(-CAPSULE_RADIUS);
+  tempBox.max.addScalar(CAPSULE_RADIUS);
+
+  collider.geometry.boundsTree.shapecast({
+    intersectsBounds: (box) => box.intersectsBox(tempBox),
+    intersectsTriangle: (tri) => {
+      const distance = tri.closestPointToSegment(tempSegment, tempVecA, tempVecB);
+      if (distance < CAPSULE_RADIUS) {
+        const depth = CAPSULE_RADIUS - distance;
+        const direction = tempVecB.sub(tempVecA).normalize();
+        tempSegment.start.addScaledVector(direction, depth);
+        tempSegment.end.addScaledVector(direction, depth);
+      }
+    }
+  });
+
+  const deltaVector = tempVecC.subVectors(tempSegment.start, playerCollider.start);
+  playerOnGround = deltaVector.y > Math.abs(0.02);
+
+  const offset = Math.max(0, deltaVector.length() - 1e-5);
+  deltaVector.normalize().multiplyScalar(offset);
+
+  playerCollider.start.add(deltaVector);
+  playerCollider.end.add(deltaVector);
+}
+
+// ---------- Movement loop ----------
+const clock = new THREE.Clock();
+const forwardVec = new THREE.Vector3();
+const rightVec = new THREE.Vector3();
+const moveVec = new THREE.Vector3();
+
+function updatePlayer(dt) {
+  // Gravity
+  if (!playerOnGround) {
+    playerVelocity.y -= GRAVITY * dt;
+  } else if (playerVelocity.y < 0) {
+    playerVelocity.y = 0;
+  }
+  if (wantsJump && playerOnGround) {
+    playerVelocity.y = JUMP_SPEED;
+    playerOnGround = false;
+  }
+  wantsJump = false;
+
+  playerCollider.start.addScaledVector(playerVelocity, dt);
+  playerCollider.end.addScaledVector(playerVelocity, dt);
+
+  // Horizontal input, relative to camera yaw
+  if (controls.isLocked) {
+    const speed = WALK_SPEED * (move.sprint ? SPRINT_MULT : 1);
+
+    camera.getWorldDirection(forwardVec);
+    forwardVec.y = 0;
+    forwardVec.normalize();
+    rightVec.crossVectors(forwardVec, camera.up).normalize();
+
+    moveVec.set(0, 0, 0);
+    if (move.forward) moveVec.add(forwardVec);
+    if (move.backward) moveVec.sub(forwardVec);
+    if (move.right) moveVec.add(rightVec);
+    if (move.left) moveVec.sub(rightVec);
+    if (moveVec.lengthSq() > 0) moveVec.normalize().multiplyScalar(speed * dt);
+
+    playerCollider.start.add(moveVec);
+    playerCollider.end.add(moveVec);
+  }
+
+  // Push the capsule out of any geometry it now overlaps
+  for (let i = 0; i < 3; i++) resolveCollisions();
+
+  // Fell out of the world — send back to spawn
+  if (playerCollider.end.y < -50) {
+    resetPlayer();
+  }
+
+  camera.position.copy(playerCollider.end);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = Math.min(clock.getDelta(), 0.1);
+  updatePlayer(dt);
+  if (coordsHud.classList.contains('visible')) {
+    const p = camera.position;
+    coordsHud.textContent =
+      `x: ${p.x.toFixed(2)}  y: ${p.y.toFixed(2)}  z: ${p.z.toFixed(2)}\nonGround: ${playerOnGround}`;
+  }
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>
