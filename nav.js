@@ -17,17 +17,23 @@
 
     function getRootPrefix() {
         var script = document.currentScript;
-        var src = script && script.getAttribute("src");
-        if (!src || src.indexOf("/") === -1) {
-            return "";
+        if (script && script.src) {
+            try {
+                return new URL("./", script.src).pathname;
+            } catch (err) {}
         }
-        var parts = src.split("/");
-        parts.pop();
-        return parts.length ? parts.join("/") + "/" : "";
+        return "/";
     }
 
     function isAbsoluteUrl(url) {
         return /^https?:\/\//i.test(url);
+    }
+
+    function navHref(link, prefix) {
+        if (isAbsoluteUrl(link.page)) {
+            return link.page;
+        }
+        return prefix + link.page;
     }
 
     function buildNavMenu(prefix) {
@@ -69,13 +75,7 @@
             slot.style.setProperty("--nav-slot-height", NAV_STACK_LAYOUT.heights[index] + "%");
 
             if (!link.static) {
-                if (isAbsoluteUrl(link.page)) {
-                    slot.href = link.page;
-                } else if (link.home && !prefix) {
-                    slot.href = "#";
-                } else {
-                    slot.href = prefix + link.page;
-                }
+                slot.href = navHref(link, prefix);
             }
 
             slot.textContent = link.label;
