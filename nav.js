@@ -10,7 +10,9 @@
         { label: "Home", page: "index.html", home: true },
         { label: "About Me", page: "about/about.html" },
         { label: "Gallery", page: "gallery/gallery.html" },
-        { label: "Shop", page: "shop/shop.html" }
+
+    // shop/shop.html goes here
+        { label: "Shop", page: "https://everything-burger.petercsnowden.workers.dev/shop/shop.html" }
     ];
 
     function getRootPrefix() {
