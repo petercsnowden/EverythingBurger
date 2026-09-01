@@ -13,7 +13,7 @@ html_handling = "none"
 
 
 [vars]
-PUBLIC_BASE_URL = "everything-burger.petercsnowden.workers.dev"
+PUBLIC_BASE_URL = "https://everything-burger.petercsnowden.workers.dev"
 CURRENCY = "usd"
 SHIPPING_CENTS = "800"
 MAX_QTY_PER_LINE = "20"
