@@ -303,7 +303,6 @@ document.addEventListener('pointerlockerror', () => {
 });
 
 document.addEventListener('keydown', (e) => {
-  console.log('keydown raw event:', { code: e.code, key: e.key, target: e.target.tagName });
   switch (e.code) {
     case 'KeyW': case 'ArrowUp': move.forward = true; break;
     case 'KeyS': case 'ArrowDown': move.backward = true; break;
@@ -314,7 +313,6 @@ document.addEventListener('keydown', (e) => {
     case 'KeyR': tryUnstick(); break;
     case 'KeyC': coordsHud.classList.toggle('visible'); break;
   }
-  console.log('move state now:', { ...move });
 });
 document.addEventListener('keyup', (e) => {
   switch (e.code) {
@@ -633,7 +631,6 @@ function animate() {
   if (coordsHud.classList.contains('visible')) {
     const p = camera.position;
     coordsHud.textContent =
-      `${controls.isLocked ? '🔒 LOCKED' : '🔓 NOT LOCKED — click Enter to re-lock'}\n` +
       `x: ${p.x.toFixed(2)}  y: ${p.y.toFixed(2)}  z: ${p.z.toFixed(2)}\nonGround: ${playerOnGround}`;
   }
   renderer.render(scene, camera);
