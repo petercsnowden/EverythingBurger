@@ -145,46 +145,6 @@
     transition: opacity .3s ease;
   }
   #reset-hint.visible { opacity: 1; }
-
-  /* ---------- Mobile touch controls ---------- */
-  #joystick-zone {
-    position: fixed; bottom: 30px; left: 30px;
-    width: 120px; height: 120px;
-    z-index: 6; display: none;
-    touch-action: none;
-  }
-  #joystick-zone.visible { display: block; }
-  #joystick-base {
-    position: absolute; inset: 0;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-  }
-  #joystick-knob {
-    position: absolute;
-    width: 50px; height: 50px;
-    left: 35px; top: 35px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.55);
-    pointer-events: none;
-  }
-  #look-zone {
-    position: fixed; inset: 0;
-    z-index: 4; display: none;
-    touch-action: none;
-  }
-  #look-zone.visible { display: block; }
-  #jump-btn {
-    position: fixed; bottom: 40px; right: 30px;
-    width: 70px; height: 70px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.4);
-    color: #fff; font-size: 13px;
-    z-index: 6; display: none;
-    touch-action: none;
-  }
-  #jump-btn.visible { display: block; }
 </style>
 </head>
 <body>
@@ -194,13 +154,6 @@
 <div id="loading-label">Loading environment…</div>
 <div id="loading-bar-wrap"><div id="loading-bar"></div></div>
 <div id="reset-hint">Stuck? Press <b style="color:#fff">R</b> to reset your position</div>
-
-<div id="look-zone"></div>
-<div id="joystick-zone">
-  <div id="joystick-base"></div>
-  <div id="joystick-knob"></div>
-</div>
-<button id="jump-btn">JUMP</button>
 
 <div id="overlay">
   <div id="overlay-card">
@@ -276,10 +229,6 @@ const resetHint = document.getElementById('reset-hint');
 const loadingBar = document.getElementById('loading-bar');
 const loadingLabel = document.getElementById('loading-label');
 const loadingWrap = document.getElementById('loading-bar-wrap');
-const joystickZone = document.getElementById('joystick-zone');
-const joystickKnob = document.getElementById('joystick-knob');
-const lookZone = document.getElementById('look-zone');
-const jumpBtn = document.getElementById('jump-btn');
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
@@ -414,26 +363,6 @@ const torchLight1 = addPointLight(new THREE.Vector3(SPAWN_POSITION.x + 3, SPAWN_
 const torchLight2 = addPointLight(new THREE.Vector3(SPAWN_POSITION.x - 4, SPAWN_POSITION.y - 6, SPAWN_POSITION.z - 3), { color: 0x88aaff, intensity: 8 });
 const TORCH_HEIGHT_ABOVE_FLOOR = 2.2; // lantern/sconce height once real floor Y is known
 
-// ---------- Positional audio ----------
-// Independent of the mobile/desktop post-processing branch below — audio
-// should load on every device, not just desktop.
-const listener = new THREE.AudioListener();
-camera.add(listener);
-
-const sound = new THREE.PositionalAudio(listener);
-const audioLoader = new THREE.AudioLoader();
-audioLoader.load('../../3d/jazz.mp3', (buffer) => {
-  sound.setBuffer(buffer);
-  sound.setDistanceModel('linear');
-  sound.setRefDistance(10);
-  sound.setMaxDistance(20);
-  sound.setRolloffFactor(1);
-  sound.setLoop(true);
-  sound.play();
-});
-sound.position.set(-55, 15, -4);
-scene.add(sound);
-
 // ---------- Post-processing ----------
 const composer = new EffectComposer(renderer);
 composer.setPixelRatio(renderer.getPixelRatio());
@@ -463,6 +392,25 @@ if (!isLikelyMobile) {
            // less spread, or lower it if you want more surfaces glowing.
   );
   composer.addPass(bloomPass);
+
+//sound!
+
+const listener = new THREE.AudioListener();
+camera.add(listener);
+
+const sound = new THREE.PositionalAudio(listener);
+const audioLoader = new THREE.AudioLoader();
+audioLoader.load('../../3d/jazz.mp3', (buffer) => {
+  sound.setBuffer(buffer);
+  sound.setDistanceModel('linear');
+  sound.setRefDistance(10);
+  sound.setMaxDistance(20);
+  sound.setRolloffFactor(1);
+  sound.setLoop(true);
+  sound.play();
+});
+sound.position.set(-55, 15, -4);
+scene.add(sound);
 }
 
 // Required as the last pass with EffectComposer, or tone mapping / color
@@ -475,32 +423,21 @@ const controls = new PointerLockControls(camera, document.body);
 const move = { forward: false, backward: false, left: false, right: false, sprint: false };
 let wantsJump = false;
 
-if (isLikelyMobile) {
-  // Pointer Lock doesn't work reliably on mobile — skip it entirely and
-  // just hide the overlay directly, driving movement from touch controls.
-  enterBtn.addEventListener('click', () => {
-    overlay.classList.add('hidden');
-    resetHint.classList.add('visible');
-    if (listener.context.state === 'suspended') listener.context.resume();
-  });
-} else {
-  enterBtn.addEventListener('click', () => controls.lock());
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) controls.lock(); });
+enterBtn.addEventListener('click', () => controls.lock());
+overlay.addEventListener('click', (e) => { if (e.target === overlay) controls.lock(); });
 
-  controls.addEventListener('lock', () => {
-    overlay.classList.add('hidden');
-    crosshair.classList.add('visible');
-    backLink.classList.remove('visible');
-    resetHint.classList.add('visible');
-    if (listener.context.state === 'suspended') listener.context.resume();
-  });
-  controls.addEventListener('unlock', () => {
-    overlay.classList.remove('hidden');
-    crosshair.classList.remove('visible');
-    backLink.classList.add('visible');
-    resetHint.classList.remove('visible');
-  });
-}
+controls.addEventListener('lock', () => {
+  overlay.classList.add('hidden');
+  crosshair.classList.add('visible');
+  backLink.classList.remove('visible');
+  resetHint.classList.add('visible');
+});
+controls.addEventListener('unlock', () => {
+  overlay.classList.remove('hidden');
+  crosshair.classList.remove('visible');
+  backLink.classList.add('visible');
+  resetHint.classList.remove('visible');
+});
 
 document.addEventListener('keydown', (e) => {
   switch (e.code) {
@@ -522,96 +459,6 @@ document.addEventListener('keyup', (e) => {
     case 'ShiftLeft': case 'ShiftRight': move.sprint = false; break;
   }
 });
-
-// ---------- Mobile touch controls ----------
-// joystickVec: -1..1 on each axis, read by updatePlayer() instead of the
-// forward/back/left/right booleans when isLikelyMobile is true.
-const joystickVec = { x: 0, y: 0 };
-const LOOK_SENSITIVITY = 0.0025;
-
-if (isLikelyMobile) {
-  joystickZone.classList.add('visible');
-  lookZone.classList.add('visible');
-  jumpBtn.classList.add('visible');
-
-  // --- Joystick (movement) ---
-  let joystickTouchId = null;
-  joystickZone.addEventListener('touchstart', (e) => {
-    const t = e.changedTouches[0];
-    joystickTouchId = t.identifier;
-  }, { passive: true });
-
-  joystickZone.addEventListener('touchmove', (e) => {
-    for (const t of e.changedTouches) {
-      if (t.identifier !== joystickTouchId) continue;
-      const rect = joystickZone.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      let dx = t.clientX - cx;
-      let dy = t.clientY - cy;
-      const max = rect.width / 2;
-      const dist = Math.min(Math.hypot(dx, dy), max);
-      const angle = Math.atan2(dy, dx);
-      dx = Math.cos(angle) * dist;
-      dy = Math.sin(angle) * dist;
-      joystickKnob.style.left = (35 + dx) + 'px';
-      joystickKnob.style.top = (35 + dy) + 'px';
-      joystickVec.x = dx / max;   // -1..1 left/right
-      joystickVec.y = dy / max;   // -1..1 forward/back
-    }
-  }, { passive: true });
-
-  function resetJoystick(e) {
-    for (const t of e.changedTouches) {
-      if (t.identifier !== joystickTouchId) continue;
-      joystickTouchId = null;
-      joystickVec.x = 0;
-      joystickVec.y = 0;
-      joystickKnob.style.left = '35px';
-      joystickKnob.style.top = '35px';
-    }
-  }
-  joystickZone.addEventListener('touchend', resetJoystick);
-  joystickZone.addEventListener('touchcancel', resetJoystick);
-
-  // --- Drag to look ---
-  let lookTouchId = null;
-  let lastTouchX = 0, lastTouchY = 0;
-
-  lookZone.addEventListener('touchstart', (e) => {
-    const t = e.changedTouches[0];
-    lookTouchId = t.identifier;
-    lastTouchX = t.clientX;
-    lastTouchY = t.clientY;
-  }, { passive: true });
-
-  lookZone.addEventListener('touchmove', (e) => {
-    for (const t of e.changedTouches) {
-      if (t.identifier !== lookTouchId) continue;
-      const dx = t.clientX - lastTouchX;
-      const dy = t.clientY - lastTouchY;
-      lastTouchX = t.clientX;
-      lastTouchY = t.clientY;
-
-      // Manually rotate the camera the way PointerLockControls does
-      // internally (it won't run without an active pointer lock).
-      camera.rotation.order = 'YXZ';
-      camera.rotation.y -= dx * LOOK_SENSITIVITY;
-      camera.rotation.x -= dy * LOOK_SENSITIVITY;
-      camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
-    }
-  }, { passive: true });
-
-  lookZone.addEventListener('touchend', (e) => {
-    for (const t of e.changedTouches) if (t.identifier === lookTouchId) lookTouchId = null;
-  });
-
-  // --- Jump ---
-  jumpBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    wantsJump = true;
-  }, { passive: false });
-}
 
 // ---------- Player capsule ----------
 // The capsule is a vertical line segment (start = feet, end = head) with a
@@ -949,7 +796,7 @@ function updatePlayer(dt) {
   playerCollider.end.addScaledVector(playerVelocity, dt);
 
   // Horizontal input, relative to camera yaw
-  if (controls.isLocked || isLikelyMobile) {
+  if (controls.isLocked) {
     const speed = WALK_SPEED * (move.sprint ? SPRINT_MULT : 1);
 
     camera.getWorldDirection(forwardVec);
@@ -958,18 +805,10 @@ function updatePlayer(dt) {
     rightVec.crossVectors(forwardVec, camera.up).normalize();
 
     moveVec.set(0, 0, 0);
-
-    if (isLikelyMobile) {
-      // joystickVec.y: negative = pushed up = forward
-      moveVec.addScaledVector(forwardVec, -joystickVec.y);
-      moveVec.addScaledVector(rightVec, joystickVec.x);
-    } else {
-      if (move.forward) moveVec.add(forwardVec);
-      if (move.backward) moveVec.sub(forwardVec);
-      if (move.right) moveVec.add(rightVec);
-      if (move.left) moveVec.sub(rightVec);
-    }
-
+    if (move.forward) moveVec.add(forwardVec);
+    if (move.backward) moveVec.sub(forwardVec);
+    if (move.right) moveVec.add(rightVec);
+    if (move.left) moveVec.sub(rightVec);
     if (moveVec.lengthSq() > 0) moveVec.normalize().multiplyScalar(speed * dt);
 
     applyHorizontalMove(moveVec);
