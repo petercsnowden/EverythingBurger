@@ -1,0 +1,21 @@
+name = "everything-burger"
+main = "backend/worker/index.js"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
+
+
+[assets]
+directory = "dist"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+html_handling = "none"
+
+
+[vars]
+PUBLIC_BASE_URL = "everythingburger.studio"
+CURRENCY = "usd"
+SHIPPING_CENTS = "800"
+MAX_QTY_PER_LINE = "20"
+MAX_CART_LINES = "30"
+ALLOWED_SHIPPING_COUNTRIES = "US,CA"
