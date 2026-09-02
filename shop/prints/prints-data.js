@@ -11,11 +11,11 @@ window.SHOP_PRINTS = [
     {
         id: "print1",
         title: "Cyanotype",
-        description: "test",
-        price: 15,
+        description: "in stock soon",
+        price: 0,
         images: [
-            "../../assets/GalleryAssets/visual-art/ArtPiece.png",
-            "../../assets/images/PaperStar.png"
+            "../../assets/shop/prints/cyanotype.jpg",
+            ""
         ],
         sizes: [],
         swatch: "orange"
@@ -23,18 +23,22 @@ window.SHOP_PRINTS = [
     {
         id: "print2",
         title: "Linoprint",
-        description: "text blurb text blurb more text its a blurb text blurb text blurb more text its a blurb text blurb text blurb more text its a blurb",
-        price: 15,
-        images: [],
+        description: "in stock soon",
+        price: 0,
+        images: [
+            "../../assets/shop/prints/house linoprint square.png"
+        ],
         sizes: [],
         swatch: "blue"
     },
     {
-        id: "Digital Print",
-        title: "Print 3",
-        description: "text blurb text blurb more text its a blurb text blurb text blurb more text its a blurb text blurb text blurb more text its a blurb",
-        price: 15,
-        images: [],
+        id: "print3",
+        title: "Digital Print",
+        description: "in stock soon",
+        price: 0,
+        images: [
+            "../../assets/GalleryAssets/visual-art/IMG_0818.jpeg"
+        ],
         sizes: [],
         swatch: "black"
     }
