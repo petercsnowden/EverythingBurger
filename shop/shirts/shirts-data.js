@@ -36,7 +36,7 @@
             id: "shirt1",
             title: "doodler",
             description: "i imagine they're listening to someone like enya",
-            price: 36,
+            price: 33,
             swatch: "blue",
             colors: doodler.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -58,7 +58,7 @@
             id: "shirt2",
             title: "poser",
             description: "text blurb text blurb more text its a blurb text blurb text blurb more text its a blurb text blurb text blurb more text its a blurb",
-            price: 36,
+            price: 33,
             swatch: "orange",
             colors: poser.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -77,7 +77,7 @@
             id: "shirt3",
             title: "adrien brody",
             description: "They're already counting me down. Okay. Thank you, God. Thank you for this, this blessed life. If I may just humbly begin by giving thanks for the tremendous outpouring of love that I have felt from this world and every individual that has treated me with respect and appreciation. I am, I feel so fortunate. You know, acting is a very fragile profession. It looks very glamorous, and in certain moments it is, but the one thing that I've gained, having the privilege to come back here, is to have some perspective. And no matter where you are in your career, no matter what you've accomplished, it can all go away. And I think what makes this night most special is the awareness of that and the gratitude that I have to still do the work that I love. Winning an award like this is, it signifies a destination, and it's something my character references in the film. But to me it also, beyond the pinnacle of a career, it is a chance to begin again and the opportunity to hopefully be fortunate enough so that the next twenty years of my life, that I can prove that I am worthy of such meaningful and important and relevant roles. I share this with my fellow nominees who are just wonderful human beings who exude grace and goodness and brilliance with their work.",
-            price: 36,
+            price: 33,
             swatch: "black",
             colors: brody.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -93,7 +93,7 @@
             id: "shirt4",
             title: "stork",
             description: "Rockabye baby, in the treetop. / Don't you know a treetop / Is no safe place to rock? / And who put you up there, / And your cradle too? / Baby, I think someone down here's Got it in for you. - Shel Silverstein",
-            price: 42,
+            price: 37,
             swatch: "black",
             colors: stork.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -112,7 +112,7 @@
             id: "shirt5",
             title: "purple people eater",
             description: "he eats purple people",
-            price: 42,
+            price: 37,
             swatch: "blue",
             colors: ppe.colors({
                 snow: { sw: [3, 4], ec: [3, 4] },
@@ -130,7 +130,7 @@
             id: "shirt6",
             title: "house",
             description: "one of my senior superlatives was most likely to live in a bungalow. i look forward to that day",
-            price: 42,
+            price: 37,
             swatch: "orange",
             colors: house.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -146,7 +146,7 @@
             id: "shirt7",
             title: "squiggles",
             description: "I shot an arrow toward the sky, / It hit a white cloud floating by. / The cloud fell dying to the shore, / I don't shoot arrows anymore. - Shel Silverstein",
-            price: 42,
+            price: 37,
             swatch: "blue",
             imagesByMaterial: squiggles.images({ sw: [1, 2], ec: [1, 2] })
         }),
@@ -154,7 +154,7 @@
             id: "shirt8",
             title: "circus lion",
             description: "roar",
-            price: 42,
+            price: 37,
             swatch: "black",
             colors: lion.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -174,7 +174,7 @@
             id: "shirt9",
             title: "circus crocodile",
             description: "apparently, after a period of bad flooding, the bridge over the mississippi river, from memphis into arkansas smelled especially bad. fish had gotten caught in the trees and died there after the water receded.",
-            price: 42,
+            price: 37,
             swatch: "black",
             colors: croc.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -194,7 +194,7 @@
             id: "shirt10",
             title: "circus elephant",
             description: "this is lottie",
-            price: 42,
+            price: 37,
             swatch: "blue",
             colors: elephant.colors({
                 snow: { sw: [2, 3], ec: [1, 2] },
@@ -213,7 +213,7 @@
             id: "shirt11",
             title: "circus monkey",
             description: "”rajhfjafjurb” - monkey",
-            price: 42,
+            price: 37,
             swatch: "blue",
             colors: monkey.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -236,7 +236,7 @@
             id: "shirt12",
             title: "circus bunny",
             description: "”Raccaccoonie” - Evelyn Wong",
-            price: 42,
+            price: 37,
             swatch: "black",
             colors: bunny.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -255,7 +255,7 @@
             id: "shirt13",
             title: "circus ensemble",
             description: "rajhfjafjurb",
-            price: 42,
+            price: 37,
             swatch: "orange",
             colors: ensemble.colors({
                 snow: { sw: [1, 2], ec: [1, 2] },
@@ -273,7 +273,7 @@
             id: "shirt14",
             title: "circus outlines",
             description: "a scrub is a guy that thinks he's fly ... a scrub is a guy who can't get no love from me - TLC (tender loving care)",
-            price: 42,
+            price: 37,
             swatch: "orange",
             colors: outlines.colors({
                 snow: { sw: [1, 2], ec: [1, 8] },
@@ -289,7 +289,7 @@
             id: "shirt15",
             title: "the essential burger",
             description: "1 lb. ground beef (80/20 blend), 1 Tbsp. Worcestershire sauce, 1/2 tsp. onion powder, 1/2 tsp. garlic powder, 1/4 tsp. black pepper, 3/4 tsp. kosher salt",
-            price: 42,
+            price: 37,
             swatch: "orange",
             colors: hamburger.colors({
                 snow: { sw: [1, 2] , ec: [1, 2] },
