@@ -258,7 +258,7 @@ body {
 
         --info2-width: 88vw;
         --info2-left: 6vw;
-        --info2-top: 105vh;
+        --info2-top: 130vh;
 
         --shadow-star-width: 50vw;
         --shadow-star-left: calc(var(--info2-left) + var(--info2-width) - var(--shadow-star-width));
