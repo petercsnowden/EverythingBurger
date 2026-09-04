@@ -1,6 +1,6 @@
 const DEFAULTS = {
     currency: "usd",
-    shippingCents: 800,
+    shippingCents: 500,
     maxQtyPerLine: 20,
     maxCartLines: 30,
     allowedShippingCountries: "US,CA"

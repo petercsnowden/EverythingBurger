@@ -16,7 +16,7 @@ html_handling = "none"
 PUBLIC_BASE_URL = "https://everythingburger.studio"
 routes = [{ pattern = "everythingburger.studio", custom_domain = true }]
 CURRENCY = "usd"
-SHIPPING_CENTS = "800"
+SHIPPING_CENTS = "500"
 MAX_QTY_PER_LINE = "20"
 MAX_CART_LINES = "30"
 ALLOWED_SHIPPING_COUNTRIES = "US,CA"
