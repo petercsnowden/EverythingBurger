@@ -99,6 +99,7 @@
                 snow: { sw: [1, 2], ec: [1, 2] },
                 pink: { sw: [7, 8], ec: [3, 4] },
                 green: { sw: [5, 6] },
+                black: { sw: [23, 24], ec: [9, 10] },
                 purple: { sw: [3, 4] },
                 red: { sw: [9, 10] },
                 blue: { sw: [11, 12], ec: [5, 6] },
