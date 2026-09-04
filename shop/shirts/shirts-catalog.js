@@ -5,7 +5,7 @@
     var EC = "assets/shop/mockups/essential cotton/";
 
     var MATERIALS = [
-        { id: "snow-washed", label: "oversized snow washed", note: "heavyweight, boxy fit", priceDelta: 0 },
+        { id: "snow-washed", label: "oversized snow washed", note: "heavyweight, boxy fit cotton", priceDelta: 0 },
         { id: "essential-cotton", label: "essential cotton", note: "midweight, regular fit", priceDelta: -5 }
     ];
 
