@@ -278,6 +278,7 @@
             swatch: "orange",
             colors: outlines.colors({
                 snow: { sw: [1, 2], ec: [1, 8] },
+                black: {sw: [13, 14], ec: [9, 10] },
                 purple: {sw: [3, 4] },
                 green: { sw: [5, 6] },
                 pink: { sw: [7, 8], ec: [7, 6] },
