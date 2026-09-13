@@ -185,6 +185,18 @@
     touch-action: none;
   }
   #jump-btn.visible { display: block; }
+
+  .lil-gui {
+    --width: 280px;
+    z-index: 30 !important;
+    max-height: min(78vh, 720px);
+    overflow: auto;
+  }
+  .lil-gui.root {
+    position: fixed !important;
+    top: 12px;
+    right: 12px;
+  }
 </style>
 </head>
 <body>
@@ -231,7 +243,11 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { SSAOPass } from 'three/addons/postprocessing/SSAOPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { LUTPass } from 'three/addons/postprocessing/LUTPass.js';
+import { LUTCubeLoader } from 'three/addons/loaders/LUTCubeLoader.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import {
   MeshBVH,
   StaticGeometryGenerator,
@@ -286,14 +302,6 @@ scene.background = new THREE.Color(0x000000);
 scene.fog = new THREE.Fog(0x000000, 30, 50000);
 
 const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 10000);
-// near/far used to be 0.05/500 — a 10,000:1 ratio, far more range than a
-// standard depth buffer can represent precisely. That precision loss is what
-// let SSAO (and shadows) "see" geometry that should have been hidden behind
-// walls. Fog already fades everything out by 110, so 130 gives a little
-// headroom without reintroducing the precision problem. If your castle
-// grounds are larger than that and you see things clipping at the edge of
-// view, raise this number gradually and re-check for the wall/AO artifacts.
-
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -304,14 +312,12 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // softer shadow edges
 document.body.appendChild(renderer.domElement);
 
-// Skip the pricier post-processing passes (AO, bloom) on phones/tablets so
-// movement stays smooth there; they still get the environment reflections
-// and the boosted lights/shadows below either way.
 const isLikelyMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
-scene.add(new THREE.HemisphereLight(0xbdd7ff, 0x2a2a2a, 1.1));
+const hemiLight = new THREE.HemisphereLight(0xbdd7ff, 0x2a2a2a, 1.1);
+scene.add(hemiLight);
 
 const sun = new THREE.DirectionalLight(0xffffff, 1.7);
 sun.position.set(8, 10, 6);
@@ -369,10 +375,9 @@ sky.material.uniforms['rayleigh'].value = 0;      // blue intensity
 sky.material.uniforms['mieCoefficient'].value = 0.006;
 sky.material.uniforms['mieDirectionalG'].value = 0.8; // sun glare size
 
-const skyEnvRT = pmremGenerator.fromScene(skyProbeScene, 0, 1, 5000);
+let skyEnvRT = pmremGenerator.fromScene(skyProbeScene, 0, 1, 5000);
 scene.environment = skyEnvRT.texture;
 scene.background = skyEnvRT.texture;
-pmremGenerator.dispose();
 
 const collisionObject = scene.getObjectByName('plane021');
 
@@ -386,37 +391,7 @@ if (collisionObject) {
 // geometry blends into the sky instead of vanishing into a dark wall.
 scene.fog.color.set(0xbfd9ea);
 
-// ---------- Point lights ----------
-// Point lights that actually cast shadows (torches, lanterns, etc). Shadow-
-// casting point lights are the most expensive light type (each renders the
-// scene 6 times, once per cubemap face), so keep the count and mapSize
-// modest and give each a `distance` cutoff so it doesn't light the whole
-// level. Reposition/duplicate these for your own fixtures.
-function addPointLight(position, { color = 0xffb066, intensity = 12, distance = 12, castShadow = true } = {}) {
-  const light = new THREE.PointLight(color, intensity, distance, 2); // decay = 2 (physically-ish correct falloff)
-  light.position.copy(position);
-  if (castShadow) {
-    light.castShadow = true;
-    light.shadow.mapSize.set(1024, 1024);
-    light.shadow.camera.near = 0.1;
-    light.shadow.camera.far = distance;
-    light.shadow.bias = -0.001;
-  }
-  scene.add(light);
-  return light;
-}
-
-// Example placeholder lights near spawn — move these to your actual torch/
-// lantern positions, and add more calls as needed. Y is a rough guess for
-// now; it gets corrected against the real floor height once the model and
-// its collision mesh are loaded, below.
-const torchLight1 = addPointLight(new THREE.Vector3(SPAWN_POSITION.x + 3, SPAWN_POSITION.y - 6, SPAWN_POSITION.z + 2));
-const torchLight2 = addPointLight(new THREE.Vector3(SPAWN_POSITION.x - 4, SPAWN_POSITION.y - 6, SPAWN_POSITION.z - 3), { color: 0x88aaff, intensity: 8 });
-const TORCH_HEIGHT_ABOVE_FLOOR = 2.2; // lantern/sconce height once real floor Y is known
-
 // ---------- Positional audio ----------
-// Independent of the mobile/desktop post-processing branch below — audio
-// should load on every device, not just desktop.
 const listener = new THREE.AudioListener();
 camera.add(listener);
 
@@ -434,40 +409,553 @@ audioLoader.load('../../3d/jazz.mp3', (buffer) => {
 sound.position.set(-55, 15, -4);
 scene.add(sound);
 
-// ---------- Post-processing ----------
+const MasterPostShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    time: { value: 0.0 },
+    resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+    vignetteEnabled: { value: true },
+    vignetteOffset: { value: 1.0 },
+    vignetteDarkness: { value: 1.2 },
+    grainEnabled: { value: true },
+    grainIntensity: { value: 0.03 },
+    tiltShiftEnabled: { value: false },
+    focusY: { value: 0.5 },
+    focusWidth: { value: 0.35 },
+    blurAmount: { value: 2.0 }
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform float time;
+    uniform vec2 resolution;
+    uniform bool vignetteEnabled;
+    uniform float vignetteOffset;
+    uniform float vignetteDarkness;
+    uniform bool grainEnabled;
+    uniform float grainIntensity;
+    uniform bool tiltShiftEnabled;
+    uniform float focusY;
+    uniform float focusWidth;
+    uniform float blurAmount;
+    varying vec2 vUv;
+
+    float rand( vec2 co ) {
+      return fract( sin( dot( co.xy, vec2( 12.9898, 78.233 ) ) ) * 43758.5453 );
+    }
+
+    void main() {
+      vec2 texelSize = 1.0 / resolution;
+      vec4 color;
+
+      if ( tiltShiftEnabled && blurAmount > 0.0 ) {
+        float dist = abs( vUv.y - focusY );
+        float blur = smoothstep( 0.0, focusWidth, dist ) * blurAmount;
+        vec4 sum = vec4( 0.0 );
+        float total = 0.0;
+        for ( float i = -2.0; i <= 2.0; i++ ) {
+          float weight = 1.0 - abs( i ) / 2.0;
+          vec2 offset = vec2( 0.0, i * blur * texelSize.y );
+          sum += texture2D( tDiffuse, vUv + offset ) * weight;
+          total += weight;
+        }
+        for ( float i = -2.0; i <= 2.0; i++ ) {
+          float weight = 1.0 - abs( i ) / 2.0;
+          vec2 offset = vec2( i * blur * texelSize.x * 0.5, 0.0 );
+          sum += texture2D( tDiffuse, vUv + offset ) * weight;
+          total += weight;
+        }
+        color = sum / total;
+      } else {
+        color = texture2D( tDiffuse, vUv );
+      }
+
+      if ( grainEnabled && grainIntensity > 0.0 ) {
+        float grain = rand( vUv + fract( time ) ) * 2.0 - 1.0;
+        color.rgb += grain * grainIntensity;
+      }
+
+      if ( vignetteEnabled ) {
+        vec2 uv = ( vUv - vec2( 0.5 ) ) * vec2( vignetteOffset );
+        float vignette = 1.0 - dot( uv, uv );
+        vignette = clamp( pow( vignette, vignetteDarkness ), 0.0, 1.0 );
+        color.rgb *= vignette;
+      }
+
+      gl_FragColor = color;
+    }
+  `
+};
+
+const GodRaysShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    sunPosition: { value: new THREE.Vector2(0.5, 0.5) },
+    decay: { value: 0.968 },
+    density: { value: 1.0 },
+    weight: { value: 0.56 },
+    exposure: { value: 0.52 },
+    strength: { value: 0.0 }
+  },
+  vertexShader: `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform vec2 sunPosition;
+    uniform float decay;
+    uniform float density;
+    uniform float weight;
+    uniform float exposure;
+    uniform float strength;
+    varying vec2 vUv;
+    void main() {
+      vec4 origC = texture2D( tDiffuse, vUv );
+      if ( strength < 0.001 ) {
+        gl_FragColor = origC;
+      } else {
+        vec3 orig = origC.rgb;
+        vec2 delta = ( vUv - sunPosition ) * density * ( 1.0 / 32.0 );
+        vec3 scatter = vec3( 0.0 );
+        vec2 coord = vUv;
+        float illum = 1.0;
+        for ( int i = 0; i < 32; i++ ) {
+          coord -= delta;
+          vec2 c = clamp( coord, vec2( 0.002 ), vec2( 0.998 ) );
+          vec3 s = texture2D( tDiffuse, c ).rgb;
+          float lum = dot( s, vec3( 0.2126, 0.7152, 0.0722 ) );
+          scatter += s * illum * weight * smoothstep( 0.01, 0.92, lum );
+          illum *= decay;
+        }
+        vec3 outRgb = orig + scatter * exposure * strength;
+        gl_FragColor = vec4( outRgb, origC.a );
+      }
+    }
+  `
+};
+
+const defaultPostProcessingSettings = {
+  postEnabled: true,
+  ssaoEnabled: !isLikelyMobile,
+  ssaoKernelRadius: 0.1,
+  ssaoMinDistance: 0.0005,
+  ssaoMaxDistance: 0.05,
+  bloomEnabled: !isLikelyMobile,
+  bloomStrength: 0.2,
+  bloomRadius: 1,
+  bloomThreshold: 1,
+  filmEnabled: true,
+  filmNoiseIntensity: 0.03,
+  vignetteEnabled: true,
+  vignetteOffset: 1.0,
+  vignetteDarkness: 1.2,
+  tiltShiftEnabled: false,
+  tiltShiftFocusY: 0.5,
+  tiltShiftFocusWidth: 0.35,
+  tiltShiftBlurAmount: 2.0,
+  lutEnabled: true,
+  lutIntensity: 1,
+  godRaysEnabled: false,
+  godRaysStrength: 1.35,
+  godRaysDecay: 0.968,
+  godRaysDensity: 1.0,
+  godRaysWeight: 0.56,
+  godRaysExposure: isLikelyMobile ? 0.36 : 0.52
+};
+
+const defaultEnvSettings = {
+  envEnabled: true,
+  fogEnabled: true,
+  fogColor: '#bfd9ea',
+  fogNear: 30,
+  fogFar: 50000,
+  hemiSkyColor: '#bdd7ff',
+  hemiGroundColor: '#2a2a2a',
+  hemiIntensity: 1.1,
+  sunColor: '#ffffff',
+  sunIntensity: 1.7,
+  sunPosX: 8,
+  sunPosY: 10,
+  sunPosZ: 6,
+  fillColor: '#cfe0ff',
+  fillIntensity: 0.5,
+  fillPosX: -10,
+  fillPosY: 6,
+  fillPosZ: -8,
+  toneMapping: 'ACESFilmic',
+  exposure: 1.05,
+  shadowsEnabled: true,
+  useSkyIbl: true,
+  useSkyBackground: true,
+  skyTurbidity: 0.3,
+  skyRayleigh: 0,
+  skyMieCoefficient: 0.006,
+  skyMieDirectionalG: 0.8
+};
+
+const toneMappingOptions = {
+  None: THREE.NoToneMapping,
+  Linear: THREE.LinearToneMapping,
+  Reinhard: THREE.ReinhardToneMapping,
+  Cineon: THREE.CineonToneMapping,
+  ACESFilmic: THREE.ACESFilmicToneMapping
+};
+
+function loadPostProcessingSettings() {
+  try {
+    const saved = localStorage.getItem('postProcessingSettings');
+    if (saved) return { ...defaultPostProcessingSettings, ...JSON.parse(saved) };
+  } catch (e) {
+    console.warn('Failed to load post-processing settings:', e);
+  }
+  return { ...defaultPostProcessingSettings };
+}
+
+const postProcessingSettings = loadPostProcessingSettings();
+
+function savePostProcessingSettings() {
+  try {
+    localStorage.setItem('postProcessingSettings', JSON.stringify(postProcessingSettings));
+  } catch (e) {
+    console.warn('Failed to save post-processing settings:', e);
+  }
+}
+
+function loadEnvSettings() {
+  try {
+    const saved = localStorage.getItem('envSettings');
+    if (saved) return { ...defaultEnvSettings, ...JSON.parse(saved) };
+  } catch (e) {
+    console.warn('Failed to load environment settings:', e);
+  }
+  return { ...defaultEnvSettings };
+}
+
+const envSettings = loadEnvSettings();
+
+function saveEnvSettings() {
+  try {
+    localStorage.setItem('envSettings', JSON.stringify(envSettings));
+  } catch (e) {
+    console.warn('Failed to save environment settings:', e);
+  }
+}
+
 const composer = new EffectComposer(renderer);
 composer.setPixelRatio(renderer.getPixelRatio());
 composer.setSize(window.innerWidth, window.innerHeight);
 composer.addPass(new RenderPass(scene, camera));
 
-let ssaoPass = null;
-let bloomPass = null;
-if (!isLikelyMobile) {
-  ssaoPass = new SSAOPass(scene, camera, window.innerWidth, window.innerHeight);
-  ssaoPass.kernelRadius = 0.1;     // tune to your model's scale (meters)
-  ssaoPass.minDistance = 0.0005;
-  ssaoPass.maxDistance = 0.05;
-  composer.addPass(ssaoPass);
+const ssaoPass = new SSAOPass(scene, camera, window.innerWidth, window.innerHeight);
+ssaoPass.kernelRadius = postProcessingSettings.ssaoKernelRadius;
+ssaoPass.minDistance = postProcessingSettings.ssaoMinDistance;
+ssaoPass.maxDistance = postProcessingSettings.ssaoMaxDistance;
+ssaoPass.enabled = postProcessingSettings.ssaoEnabled;
+composer.addPass(ssaoPass);
 
-  bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    .5,  // strength — kept low; see threshold note below
-    0.0,  // radius
-    0.97   // threshold — this pass runs AFTER tone mapping is already baked
-           // into the image (applied per-material during the render pass),
-           // not on raw HDR values. Against an already-tonemapped image,
-           // ordinary lit surfaces commonly sit at 0.5–0.9 brightness, so a
-           // threshold of 0.85 caught almost everything — that was the
-           // "everything is glowing" bug. 0.92 only catches genuinely bright
-           // spots (windows, fixtures, the sun). Raise toward 1.0 for even
-           // less spread, or lower it if you want more surfaces glowing.
+const godRaysPass = new ShaderPass(GodRaysShader);
+composer.addPass(godRaysPass);
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  postProcessingSettings.bloomStrength,
+  postProcessingSettings.bloomRadius,
+  postProcessingSettings.bloomThreshold
+);
+composer.addPass(bloomPass);
+
+const masterPostPass = new ShaderPass(MasterPostShader);
+masterPostPass.uniforms.resolution.value.set(window.innerWidth, window.innerHeight);
+composer.addPass(masterPostPass);
+
+let lutPass = null;
+
+function applyPostProcessingSettings() {
+  const masterOn = postProcessingSettings.postEnabled;
+
+  ssaoPass.enabled = masterOn && postProcessingSettings.ssaoEnabled;
+  ssaoPass.kernelRadius = postProcessingSettings.ssaoKernelRadius;
+  ssaoPass.minDistance = postProcessingSettings.ssaoMinDistance;
+  ssaoPass.maxDistance = postProcessingSettings.ssaoMaxDistance;
+
+  bloomPass.enabled = masterOn && postProcessingSettings.bloomEnabled;
+  bloomPass.strength = postProcessingSettings.bloomStrength;
+  bloomPass.radius = postProcessingSettings.bloomRadius;
+  bloomPass.threshold = postProcessingSettings.bloomThreshold;
+
+  const grainOn = masterOn && !isLikelyMobile && postProcessingSettings.filmEnabled;
+  masterPostPass.enabled = masterOn && (
+    postProcessingSettings.filmEnabled
+    || postProcessingSettings.vignetteEnabled
+    || postProcessingSettings.tiltShiftEnabled
   );
-  composer.addPass(bloomPass);
+  masterPostPass.uniforms.grainEnabled.value = grainOn;
+  masterPostPass.uniforms.grainIntensity.value = grainOn ? postProcessingSettings.filmNoiseIntensity : 0;
+  masterPostPass.uniforms.vignetteEnabled.value = masterOn && postProcessingSettings.vignetteEnabled;
+  masterPostPass.uniforms.vignetteOffset.value = postProcessingSettings.vignetteOffset;
+  masterPostPass.uniforms.vignetteDarkness.value = postProcessingSettings.vignetteDarkness;
+  masterPostPass.uniforms.tiltShiftEnabled.value = masterOn && postProcessingSettings.tiltShiftEnabled;
+  masterPostPass.uniforms.focusY.value = postProcessingSettings.tiltShiftFocusY;
+  masterPostPass.uniforms.focusWidth.value = postProcessingSettings.tiltShiftFocusWidth;
+  masterPostPass.uniforms.blurAmount.value = postProcessingSettings.tiltShiftBlurAmount;
+
+  if (lutPass) {
+    lutPass.enabled = masterOn && postProcessingSettings.lutEnabled;
+    lutPass.intensity = postProcessingSettings.lutIntensity;
+  }
+
+  const raysOn = masterOn && postProcessingSettings.godRaysEnabled;
+  godRaysPass.enabled = raysOn;
+  godRaysPass.uniforms.decay.value = postProcessingSettings.godRaysDecay;
+  godRaysPass.uniforms.density.value = postProcessingSettings.godRaysDensity;
+  godRaysPass.uniforms.weight.value = postProcessingSettings.godRaysWeight;
+  godRaysPass.uniforms.exposure.value = postProcessingSettings.godRaysExposure;
+  godRaysPass.uniforms.strength.value = raysOn ? postProcessingSettings.godRaysStrength : 0;
 }
 
-// Required as the last pass with EffectComposer, or tone mapping / color
-// space conversion (set on the renderer above) won't be applied correctly.
-composer.addPass(new OutputPass());
+function rebuildSkyEnvironment() {
+  const sunDirection = new THREE.Vector3(envSettings.sunPosX, envSettings.sunPosY, envSettings.sunPosZ).normalize();
+  sky.material.uniforms.sunPosition.value.copy(sunDirection);
+  sky.material.uniforms.turbidity.value = envSettings.skyTurbidity;
+  sky.material.uniforms.rayleigh.value = envSettings.skyRayleigh;
+  sky.material.uniforms.mieCoefficient.value = envSettings.skyMieCoefficient;
+  sky.material.uniforms.mieDirectionalG.value = envSettings.skyMieDirectionalG;
+  if (skyEnvRT) skyEnvRT.dispose();
+  skyEnvRT = pmremGenerator.fromScene(skyProbeScene, 0, 1, 5000);
+}
+
+let skyRebuildTimer = 0;
+function scheduleSkyRebuild() {
+  window.clearTimeout(skyRebuildTimer);
+  skyRebuildTimer = window.setTimeout(() => {
+    rebuildSkyEnvironment();
+    applyEnvSettings();
+  }, 160);
+}
+
+function applyEnvSettings() {
+  if (!envSettings.envEnabled) {
+    scene.fog = null;
+    scene.environment = null;
+    scene.background = new THREE.Color(0x555555);
+    renderer.toneMapping = THREE.NoToneMapping;
+    renderer.toneMappingExposure = 1;
+    renderer.shadowMap.enabled = false;
+    hemiLight.color.set(0xffffff);
+    hemiLight.groundColor.set(0x444444);
+    hemiLight.intensity = 1;
+    sun.color.set(0xffffff);
+    sun.intensity = 0.85;
+    sun.position.set(8, 10, 6);
+    sun.castShadow = false;
+    fill.color.set(0xffffff);
+    fill.intensity = 0.25;
+    fill.position.set(-10, 6, -8);
+    return;
+  }
+
+  renderer.shadowMap.enabled = envSettings.shadowsEnabled;
+  renderer.toneMapping = toneMappingOptions[envSettings.toneMapping] ?? THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = envSettings.exposure;
+
+  hemiLight.color.set(envSettings.hemiSkyColor);
+  hemiLight.groundColor.set(envSettings.hemiGroundColor);
+  hemiLight.intensity = envSettings.hemiIntensity;
+
+  sun.color.set(envSettings.sunColor);
+  sun.intensity = envSettings.sunIntensity;
+  sun.position.set(envSettings.sunPosX, envSettings.sunPosY, envSettings.sunPosZ);
+  sun.castShadow = envSettings.shadowsEnabled;
+  sun.target.position.set(SPAWN_POSITION.x, 0, SPAWN_POSITION.z);
+  sun.target.updateMatrixWorld();
+
+  fill.color.set(envSettings.fillColor);
+  fill.intensity = envSettings.fillIntensity;
+  fill.position.set(envSettings.fillPosX, envSettings.fillPosY, envSettings.fillPosZ);
+
+  if (envSettings.fogEnabled) {
+    scene.fog = new THREE.Fog(envSettings.fogColor, envSettings.fogNear, envSettings.fogFar);
+  } else {
+    scene.fog = null;
+  }
+
+  if (envSettings.useSkyIbl) {
+    scene.environment = skyEnvRT ? skyEnvRT.texture : null;
+  } else {
+    scene.environment = null;
+  }
+
+  if (envSettings.useSkyBackground && skyEnvRT) {
+    scene.background = skyEnvRT.texture;
+  } else {
+    scene.background = new THREE.Color(envSettings.fogColor);
+  }
+}
+
+applyPostProcessingSettings();
+rebuildSkyEnvironment();
+applyEnvSettings();
+
+const outputPass = new OutputPass();
+composer.addPass(outputPass);
+
+const lutLoader = new LUTCubeLoader();
+lutLoader.load('./HardBoost.cube', (result) => {
+  lutPass = new LUTPass({ lut: result.texture3D, intensity: postProcessingSettings.lutIntensity });
+  lutPass.enabled = postProcessingSettings.postEnabled && postProcessingSettings.lutEnabled;
+  const outputIndex = composer.passes.indexOf(outputPass);
+  composer.insertPass(lutPass, outputIndex >= 0 ? outputIndex : composer.passes.length - 1);
+}, undefined, (err) => {
+  console.warn('LUT not loaded:', err);
+});
+
+const _godRayWorld = new THREE.Vector3();
+
+function updateGodRaySunPosition() {
+  if (!postProcessingSettings.postEnabled || !postProcessingSettings.godRaysEnabled) return;
+  _godRayWorld.copy(sun.position);
+  _godRayWorld.project(camera);
+  const u = THREE.MathUtils.clamp(_godRayWorld.x * 0.5 + 0.5, -0.25, 1.25);
+  const v = THREE.MathUtils.clamp(_godRayWorld.y * -0.5 + 0.5, -0.25, 1.25);
+  godRaysPass.uniforms.sunPosition.value.set(u, v);
+}
+
+function bindDevGui() {
+  const gui = new GUI({ title: 'Three.js Dev' });
+  gui.domElement.addEventListener('mousedown', (e) => e.stopPropagation());
+  gui.domElement.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+
+  function onPostChange() {
+    applyPostProcessingSettings();
+    savePostProcessingSettings();
+  }
+
+  function onEnvChange() {
+    applyEnvSettings();
+    saveEnvSettings();
+  }
+
+  function onSkyChange() {
+    scheduleSkyRebuild();
+    saveEnvSettings();
+  }
+
+  const postFolder = gui.addFolder('Post processing');
+  postFolder.add(postProcessingSettings, 'postEnabled').name('Enable all').onChange(onPostChange);
+
+  const ssaoFolder = postFolder.addFolder('SSAO');
+  ssaoFolder.add(postProcessingSettings, 'ssaoEnabled').name('Enabled').onChange(onPostChange);
+  ssaoFolder.add(postProcessingSettings, 'ssaoKernelRadius', 0.01, 2, 0.01).name('Kernel radius').onChange(onPostChange);
+  ssaoFolder.add(postProcessingSettings, 'ssaoMinDistance', 0.0001, 0.01, 0.0001).name('Min distance').onChange(onPostChange);
+  ssaoFolder.add(postProcessingSettings, 'ssaoMaxDistance', 0.01, 0.5, 0.005).name('Max distance').onChange(onPostChange);
+
+  const bloomFolder = postFolder.addFolder('Bloom');
+  bloomFolder.add(postProcessingSettings, 'bloomEnabled').name('Enabled').onChange(onPostChange);
+  bloomFolder.add(postProcessingSettings, 'bloomStrength', 0, 3, 0.01).name('Strength').onChange(onPostChange);
+  bloomFolder.add(postProcessingSettings, 'bloomRadius', 0, 2, 0.01).name('Radius').onChange(onPostChange);
+  bloomFolder.add(postProcessingSettings, 'bloomThreshold', 0, 1, 0.01).name('Threshold').onChange(onPostChange);
+
+  const filmFolder = postFolder.addFolder('Film grain');
+  filmFolder.add(postProcessingSettings, 'filmEnabled').name('Enabled').onChange(onPostChange);
+  filmFolder.add(postProcessingSettings, 'filmNoiseIntensity', 0, 0.2, 0.001).name('Intensity').onChange(onPostChange);
+
+  const vigFolder = postFolder.addFolder('Vignette');
+  vigFolder.add(postProcessingSettings, 'vignetteEnabled').name('Enabled').onChange(onPostChange);
+  vigFolder.add(postProcessingSettings, 'vignetteOffset', 0.2, 2, 0.01).name('Offset').onChange(onPostChange);
+  vigFolder.add(postProcessingSettings, 'vignetteDarkness', 0.2, 4, 0.01).name('Darkness').onChange(onPostChange);
+
+  const tiltFolder = postFolder.addFolder('Tilt-shift');
+  tiltFolder.add(postProcessingSettings, 'tiltShiftEnabled').name('Enabled').onChange(onPostChange);
+  tiltFolder.add(postProcessingSettings, 'tiltShiftFocusY', 0, 1, 0.01).name('Focus Y').onChange(onPostChange);
+  tiltFolder.add(postProcessingSettings, 'tiltShiftFocusWidth', 0.05, 1, 0.01).name('Focus width').onChange(onPostChange);
+  tiltFolder.add(postProcessingSettings, 'tiltShiftBlurAmount', 0, 8, 0.05).name('Blur').onChange(onPostChange);
+
+  const lutFolder = postFolder.addFolder('LUT');
+  lutFolder.add(postProcessingSettings, 'lutEnabled').name('Enabled').onChange(onPostChange);
+  lutFolder.add(postProcessingSettings, 'lutIntensity', 0, 1, 0.01).name('Intensity').onChange(onPostChange);
+
+  const raysFolder = postFolder.addFolder('God rays');
+  raysFolder.add(postProcessingSettings, 'godRaysEnabled').name('Enabled').onChange(onPostChange);
+  raysFolder.add(postProcessingSettings, 'godRaysStrength', 0, 3, 0.01).name('Strength').onChange(onPostChange);
+  raysFolder.add(postProcessingSettings, 'godRaysDecay', 0.8, 0.999, 0.001).name('Decay').onChange(onPostChange);
+  raysFolder.add(postProcessingSettings, 'godRaysDensity', 0.1, 2, 0.01).name('Density').onChange(onPostChange);
+  raysFolder.add(postProcessingSettings, 'godRaysWeight', 0, 1, 0.01).name('Weight').onChange(onPostChange);
+  raysFolder.add(postProcessingSettings, 'godRaysExposure', 0, 1.5, 0.01).name('Exposure').onChange(onPostChange);
+
+  postFolder.add({
+    reset() {
+      Object.assign(postProcessingSettings, defaultPostProcessingSettings);
+      applyPostProcessingSettings();
+      savePostProcessingSettings();
+      gui.controllersRecursive().forEach((c) => c.updateDisplay());
+    }
+  }, 'reset').name('Reset post defaults');
+
+  const envFolder = gui.addFolder('Environment');
+  envFolder.add(envSettings, 'envEnabled').name('Enable all').onChange(onEnvChange);
+
+  const fogFolder = envFolder.addFolder('Fog');
+  fogFolder.add(envSettings, 'fogEnabled').name('Enabled').onChange(onEnvChange);
+  fogFolder.addColor(envSettings, 'fogColor').name('Color').onChange(onEnvChange);
+  fogFolder.add(envSettings, 'fogNear', 0, 200, 1).name('Near').onChange(onEnvChange);
+  fogFolder.add(envSettings, 'fogFar', 50, 80000, 50).name('Far').onChange(onEnvChange);
+
+  const hemiFolder = envFolder.addFolder('Hemisphere light');
+  hemiFolder.addColor(envSettings, 'hemiSkyColor').name('Sky').onChange(onEnvChange);
+  hemiFolder.addColor(envSettings, 'hemiGroundColor').name('Ground').onChange(onEnvChange);
+  hemiFolder.add(envSettings, 'hemiIntensity', 0, 4, 0.01).name('Intensity').onChange(onEnvChange);
+
+  const sunFolder = envFolder.addFolder('Sun');
+  sunFolder.addColor(envSettings, 'sunColor').name('Color').onChange(onEnvChange);
+  sunFolder.add(envSettings, 'sunIntensity', 0, 8, 0.01).name('Intensity').onChange(onEnvChange);
+  sunFolder.add(envSettings, 'sunPosX', -80, 80, 0.1).name('Pos X').onChange(onSkyChange);
+  sunFolder.add(envSettings, 'sunPosY', 0, 80, 0.1).name('Pos Y').onChange(onSkyChange);
+  sunFolder.add(envSettings, 'sunPosZ', -80, 80, 0.1).name('Pos Z').onChange(onSkyChange);
+  sunFolder.add(envSettings, 'shadowsEnabled').name('Shadows').onChange(onEnvChange);
+
+  const fillFolder = envFolder.addFolder('Fill light');
+  fillFolder.addColor(envSettings, 'fillColor').name('Color').onChange(onEnvChange);
+  fillFolder.add(envSettings, 'fillIntensity', 0, 4, 0.01).name('Intensity').onChange(onEnvChange);
+  fillFolder.add(envSettings, 'fillPosX', -80, 80, 0.1).name('Pos X').onChange(onEnvChange);
+  fillFolder.add(envSettings, 'fillPosY', 0, 80, 0.1).name('Pos Y').onChange(onEnvChange);
+  fillFolder.add(envSettings, 'fillPosZ', -80, 80, 0.1).name('Pos Z').onChange(onEnvChange);
+
+  const skyFolder = envFolder.addFolder('Sky / IBL');
+  skyFolder.add(envSettings, 'useSkyIbl').name('Use sky IBL').onChange(onEnvChange);
+  skyFolder.add(envSettings, 'useSkyBackground').name('Use sky background').onChange(onEnvChange);
+  skyFolder.add(envSettings, 'skyTurbidity', 0, 20, 0.05).name('Turbidity').onChange(onSkyChange);
+  skyFolder.add(envSettings, 'skyRayleigh', 0, 4, 0.01).name('Rayleigh').onChange(onSkyChange);
+  skyFolder.add(envSettings, 'skyMieCoefficient', 0, 0.02, 0.0001).name('Mie').onChange(onSkyChange);
+  skyFolder.add(envSettings, 'skyMieDirectionalG', 0, 1, 0.01).name('Mie G').onChange(onSkyChange);
+
+  const toneFolder = envFolder.addFolder('Tone mapping');
+  toneFolder.add(envSettings, 'toneMapping', Object.keys(toneMappingOptions)).name('Mode').onChange(onEnvChange);
+  toneFolder.add(envSettings, 'exposure', 0.1, 3, 0.01).name('Exposure').onChange(onEnvChange);
+
+  envFolder.add({
+    reset() {
+      Object.assign(envSettings, defaultEnvSettings);
+      rebuildSkyEnvironment();
+      applyEnvSettings();
+      saveEnvSettings();
+      gui.controllersRecursive().forEach((c) => c.updateDisplay());
+    }
+  }, 'reset').name('Reset environment defaults');
+
+  gui.close();
+}
+
+bindDevGui();
 
 // ---------- Controls ----------
 const controls = new PointerLockControls(camera, document.body);
@@ -709,8 +1197,7 @@ loader.load(
       });
 
       // Now that the real collision mesh exists, find the actual floor
-      // height under spawn (rather than guessing) and use it to correct
-      // the shadow target and torch light heights set as placeholders above.
+      // height under spawn and aim the sun shadow target at it.
       const floorRay = new THREE.Raycaster();
       floorRay.far = 1000;
       floorRay.set(
@@ -721,9 +1208,7 @@ loader.load(
       if (floorHits.length) {
         const floorY = floorHits[0].point.y;
         sun.target.position.y = floorY;
-        torchLight1.position.y = floorY + TORCH_HEIGHT_ABOVE_FLOOR;
-        torchLight2.position.y = floorY + TORCH_HEIGHT_ABOVE_FLOOR;
-        console.log(`Real floor Y under spawn: ${floorY.toFixed(2)} — shadow target and torches corrected to match.`);
+        console.log(`Real floor Y under spawn: ${floorY.toFixed(2)} — shadow target corrected to match.`);
       } else {
         console.warn('Could not find real floor under SPAWN_POSITION for light correction — leaving placeholder heights.');
       }
@@ -758,6 +1243,7 @@ window.addEventListener('resize', () => {
   composer.setSize(window.innerWidth, window.innerHeight);
   if (ssaoPass) ssaoPass.setSize(window.innerWidth, window.innerHeight);
   if (bloomPass) bloomPass.setSize(window.innerWidth, window.innerHeight);
+  if (masterPostPass) masterPostPass.uniforms.resolution.value.set(window.innerWidth, window.innerHeight);
 });
 
 // ---------- Collision resolution ----------
@@ -993,7 +1479,13 @@ function animate() {
   requestAnimationFrame(animate);
   const dt = Math.min(clock.getDelta(), 0.1);
   updatePlayer(dt);
-  composer.render();
+  if (postProcessingSettings.postEnabled) {
+    masterPostPass.uniforms.time.value += dt;
+    updateGodRaySunPosition();
+    composer.render();
+  } else {
+    renderer.render(scene, camera);
+  }
 }
 animate();
 </script>
