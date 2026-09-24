@@ -120,6 +120,23 @@ body {
 
 .about-info-mobile2 {
     display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .about-info-mobile2 {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        visibility: hidden !important;
+    }
 }
 
 .about-info2-wrap {
@@ -298,6 +315,11 @@ body {
         top: var(--info-mobile2-top);
         width: var(--info-mobile2-width);
         height: auto;
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        visibility: visible;
+        pointer-events: auto;
         display: block;
         z-index: 2;
     }

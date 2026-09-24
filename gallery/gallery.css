@@ -253,6 +253,7 @@ body {
     gap: var(--buttons-gap);
     width: 100%;
     max-width: min(var(--buttons-max-width-vw), var(--buttons-max-width-rem));
+    z-index: 500;
 }
 
 .gallery-btn {
