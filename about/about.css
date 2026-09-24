@@ -51,6 +51,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "Averia Serif Libre";
+    src: url("../assets/fonts/Averia_Serif_Libre/AveriaSerifLibre-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -257,6 +265,115 @@ body {
     top: 0vw;
 }
 
+.about-footer-wrap {
+    display: none;
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+}
+
+.site-footer {
+    width: 100%;
+    box-sizing: border-box;
+    padding:
+        2vw
+        max(1vw, 18vw)
+        calc(2vw + clamp(3rem, 10vw, 6rem))
+        1vw;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+    text-align: center;
+}
+
+.site-footer__title {
+    margin: 0;
+    font-family: "Damsterdam", cursive;
+    font-weight: 400;
+    font-size: 9vw;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #000;
+}
+
+.site-footer__info-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3vw;
+}
+
+.site-footer__details {
+    margin: 0;
+    text-align: left;
+    font-family: "Averia Serif Libre", serif;
+    font-size: 3.5vw;
+    line-height: 1.5;
+    color: #000;
+}
+
+.site-footer__details p {
+    margin: 0;
+}
+
+.site-footer__circles {
+    flex: none;
+    width: 14vw;
+}
+
+.site-footer__circles svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.site-footer__guestbook {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40vw;
+    padding: 0.6em 1.2em;
+    background-color: var(--color-cream);
+    color: #000;
+    font-family: "Damsterdam", cursive;
+    font-size: 3vw;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.site-footer__socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6vw;
+}
+
+.social-btn {
+    display: block;
+    width: 10vw;
+}
+
+.social-btn img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.site-footer__brand {
+    position: absolute;
+    right: max(3vw, env(safe-area-inset-right, 0px));
+    bottom: max(3vw, env(safe-area-inset-bottom, 0px));
+    z-index: 2;
+    width: clamp(5.5rem, 16vw, 11rem);
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+}
+
 
 
 /* --------------------------------------------------------------------------
@@ -338,5 +455,9 @@ body {
     width: 100vw;
     top: 0vw;
 }
+
+    .about-footer-wrap {
+        display: block;
+    }
 
 }

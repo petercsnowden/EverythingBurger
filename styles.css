@@ -562,7 +562,16 @@ body {
     --about-text-top: 75vw;
     --about-text-z: 25;
 
+        --footer-height: 66vw;
+        --footer-title-size: 9vw;
+        --footer-text-size: 3.5vw;
+        --footer-circles-size: 14vw;
+        --footer-guestbook-size: 3vw;
+        --footer-guestbook-width: 40vw;
+        --footer-social-size: 10vw;
+        --footer-social-gap: 6vw;
     }
+
 }
 
 /* --------------------------------------------------------------------------
@@ -667,6 +676,42 @@ body {
     width: 50%;
     height: 50%;
     display: block;
+}
+
+.site-footer__brand {
+    display: none;
+    position: absolute;
+    right: max(3vw, env(safe-area-inset-right, 0px));
+    bottom: max(3vw, env(safe-area-inset-bottom, 0px));
+    z-index: 2;
+    width: clamp(5.5rem, 16vw, 11rem);
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (max-width: 767px) {
+    .site-footer {
+        padding:
+            var(--footer-padding-y)
+            max(var(--footer-padding-x), 18vw)
+            calc(var(--footer-padding-y) + clamp(3rem, 10vw, 6rem))
+            var(--footer-padding-x);
+    }
+
+    .site-footer__title,
+    .site-footer__guestbook {
+        text-transform: uppercase;
+    }
+
+    .site-footer__brand {
+        display: block;
+    }
+
+    .social-btn img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .social-btn:hover,
