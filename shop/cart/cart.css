@@ -329,7 +329,7 @@ body {
     margin: 0;
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: var(--cart-summary-size);
+    font-size: clamp(1rem, 2.2vw, 1.45rem);
     letter-spacing: 0.02em;
     line-height: 1;
     color: var(--color-black);
