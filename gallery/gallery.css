@@ -431,8 +431,11 @@ body {
     right: max(3vw, env(safe-area-inset-right, 0px));
     bottom: max(3vw, env(safe-area-inset-bottom, 0px));
     z-index: 2;
-    width: clamp(5.5rem, 16vw, 11rem);
+    width: min(18vw, 5.5rem);
     height: auto;
+    max-height: 12vw;
+    aspect-ratio: 1092 / 768;
+    object-fit: contain;
     pointer-events: none;
     user-select: none;
 }
@@ -558,5 +561,11 @@ body {
         margin-top: 0;
         width: var(--doodle-width);
         max-width: var(--doodle-max-width);
+    }
+}
+
+@media (min-width: 768px) {
+    .site-footer__brand {
+        display: none !important;
     }
 }
