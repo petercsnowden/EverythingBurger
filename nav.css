@@ -20,25 +20,18 @@ body.nav-open {
     height: 100%;
 }
 
-#smooth-wrapper {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 0;
-}
-
-#smooth-content {
-    overflow: visible;
-    width: 100%;
-}
-
-html.has-smooth-scroll body.nav-open {
-    position: static;
-    inset: auto;
+html.lenis,
+html.lenis body {
     height: auto;
-    touch-action: auto;
+}
+
+html.lenis.nav-open,
+html.lenis body.nav-open {
+    height: 100%;
+}
+
+.lenis.lenis-smooth iframe {
+    pointer-events: none;
 }
 
 body.nav-open {

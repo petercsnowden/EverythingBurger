@@ -13,8 +13,7 @@ function usesSelfTransform(el) {
 }
 
 function renderStars() {
-    const smoother = window.ScrollSmoother && window.ScrollSmoother.get();
-    const scrollY = smoother ? smoother.scrollTop() : (window.scrollY || window.pageYOffset);
+    const scrollY = window.scrollY || window.pageYOffset || 0;
 
     scrollStars.forEach(({ el, speed }) => {
         if (usesSelfTransform(el)) {
