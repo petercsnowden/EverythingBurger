@@ -322,6 +322,26 @@ body {
     transition: filter var(--ease-quick), transform var(--ease-quick);
 }
 
+.cart-checkout__stripe {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--cart-summary-size);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--color-black);
+}
+
+.cart-checkout__stripe-logo {
+    display: block;
+    width: 1.35em;
+    height: 1.35em;
+    flex: none;
+}
+
 .cart-checkout:hover,
 .cart-checkout:focus-visible {
     filter: brightness(0.95);

@@ -9,7 +9,8 @@
     var subtotalEl = document.querySelector("[data-cart-subtotal]");
     var checkoutBtn = document.querySelector("[data-checkout]");
     var errorEl = document.querySelector("[data-checkout-error]");
-    var defaultCheckoutLabel = checkoutBtn ? checkoutBtn.textContent : "Checkout";
+    var checkoutLabel = checkoutBtn ? checkoutBtn.querySelector(".cart-checkout__label") : null;
+    var defaultCheckoutLabel = checkoutLabel ? checkoutLabel.textContent : "Checkout";
 
     if (!cart || !listEl) {
         return;
@@ -165,10 +166,10 @@
             }
             setCheckoutError("");
             checkoutBtn.disabled = true;
-            checkoutBtn.textContent = "Redirecting…";
+            checkoutLabel.textContent = "Redirecting…";
             cart.checkout().catch(function (err) {
                 checkoutBtn.disabled = false;
-                checkoutBtn.textContent = defaultCheckoutLabel;
+                checkoutLabel.textContent = defaultCheckoutLabel;
                 setCheckoutError((err && err.message) || "Checkout failed.");
             });
         });
