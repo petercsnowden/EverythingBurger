@@ -14,7 +14,7 @@ window.SHOP_PRINTS = [
         description: "in stock soon",
         price: 0,
         images: [
-            "../../assets/shop/prints/cyanotype.jpg",
+            "../../assets/shop/prints/cyanotype.webp",
             ""
         ],
         sizes: [],
@@ -26,7 +26,7 @@ window.SHOP_PRINTS = [
         description: "in stock soon",
         price: 0,
         images: [
-            "../../assets/shop/prints/house linoprint square.png"
+            "../../assets/shop/prints/house linoprint square.webp"
         ],
         sizes: [],
         swatch: "blue"
@@ -37,7 +37,7 @@ window.SHOP_PRINTS = [
         description: "in stock soon",
         price: 0,
         images: [
-            "../../assets/GalleryAssets/visual-art/IMG_0818.jpeg"
+            "../../assets/GalleryAssets/visual-art/IMG_0818.webp"
         ],
         sizes: [],
         swatch: "black"

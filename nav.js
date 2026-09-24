@@ -98,7 +98,7 @@
 
         var stackImg = document.createElement("img");
         stackImg.className = "nav-stack__image";
-        stackImg.src = prefix + "assets/images/BurgerStack.png";
+        stackImg.src = prefix + "assets/images/BurgerStack.webp";
         stackImg.alt = "";
         reveal.appendChild(stackImg);
 
@@ -158,9 +158,14 @@
         if (!toggle || !menu) {
             return;
         }
+        var smoother = window.ScrollSmoother && window.ScrollSmoother.get();
         if (isOpen) {
-            scrollY = window.scrollY;
-            document.body.style.top = "-" + scrollY + "px";
+            scrollY = smoother ? smoother.scrollTop() : window.scrollY;
+            if (smoother) {
+                smoother.paused(true);
+            } else {
+                document.body.style.top = "-" + scrollY + "px";
+            }
             document.documentElement.classList.add("nav-open");
             document.body.classList.add("nav-open");
             menu.classList.add("is-open");
@@ -172,7 +177,11 @@
             document.documentElement.classList.remove("nav-open");
             document.body.classList.remove("nav-open");
             document.body.style.top = "";
-            window.scrollTo(0, scrollY);
+            if (smoother) {
+                smoother.paused(false);
+            } else {
+                window.scrollTo(0, scrollY);
+            }
             toggle.setAttribute("aria-expanded", "false");
             menu.setAttribute("aria-hidden", "true");
             toggle.setAttribute("aria-label", "Open menu");
@@ -267,4 +276,73 @@ document.querySelectorAll('.single-flip__card').forEach(card => {
         }
     });
 });
+})();
+
+(function () {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+    }
+    if (/\/3d\//.test(window.location.pathname)) {
+        return;
+    }
+
+    var KEEP = ".nav-toggle, .nav-menu, .shop-toolbar, .shop-back, #lightbox, .lightbox";
+
+    function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+            var script = document.createElement("script");
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
+    function wrapPage() {
+        if (document.getElementById("smooth-wrapper")) {
+            return;
+        }
+
+        var wrapper = document.createElement("div");
+        wrapper.id = "smooth-wrapper";
+        var content = document.createElement("div");
+        content.id = "smooth-content";
+        wrapper.appendChild(content);
+
+        Array.from(document.body.childNodes).forEach(function (node) {
+            if (node.nodeType === 1 && node.matches(KEEP)) {
+                return;
+            }
+            content.appendChild(node);
+        });
+
+        content.querySelectorAll(KEEP).forEach(function (node) {
+            document.body.appendChild(node);
+        });
+
+        document.body.appendChild(wrapper);
+    }
+
+    var gsapBase = "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/";
+
+    loadScript(gsapBase + "gsap.min.js")
+        .then(function () { return loadScript(gsapBase + "ScrollTrigger.min.js"); })
+        .then(function () { return loadScript(gsapBase + "ScrollSmoother.min.js"); })
+        .then(function () {
+            wrapPage();
+            window.gsap.registerPlugin(window.ScrollTrigger, window.ScrollSmoother);
+            document.documentElement.classList.add("has-smooth-scroll");
+            window.ScrollSmoother.create({
+                wrapper: "#smooth-wrapper",
+                content: "#smooth-content",
+                smooth: 1.15,
+                smoothTouch: 0.1,
+                effects: false,
+                normalizeScroll: true,
+                onUpdate: function () {
+                    window.dispatchEvent(new Event("scroll"));
+                }
+            });
+        })
+        .catch(function () {});
 })();

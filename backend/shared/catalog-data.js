@@ -5,14 +5,14 @@ export const PRODUCTS = [
         "id": "shirt1",
         "title": "doodler",
         "category": "shirts",
-        "priceCents": 3600,
+        "priceCents": 3300,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00001.webp",
         "colorIds": [
             "snow",
             "black",
@@ -38,152 +38,152 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00001.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00001.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00001.webp"
             },
             {
                 "color": "black",
                 "colorLabel": "black",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler000025.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler000025.webp"
             },
             {
                 "color": "black",
                 "colorLabel": "black",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler000011.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler000011.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00019.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00019.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00003.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00003.webp"
             },
             {
                 "color": "red",
                 "colorLabel": "red",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00021.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00021.webp"
             },
             {
                 "color": "red",
                 "colorLabel": "red",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00009.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00009.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00023.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00023.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00005.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00005.webp"
             },
             {
                 "color": "brown",
                 "colorLabel": "brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00007.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00007.webp"
             },
             {
                 "color": "brown",
                 "colorLabel": "brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00007.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/doodler/EC_doodler00007.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00017.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00017.webp"
             },
             {
                 "color": "dark-green",
                 "colorLabel": "dark green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00015.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00015.webp"
             },
             {
                 "color": "washed-green",
                 "colorLabel": "washed green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00003.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00003.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00005.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00005.webp"
             },
             {
                 "color": "dark-purple",
                 "colorLabel": "dark purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00013.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00013.webp"
             },
             {
                 "color": "dark-blue",
                 "colorLabel": "dark blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00011.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00011.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00009.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /doodler/SW_doodler00009.webp"
             }
         ]
     },
@@ -191,14 +191,14 @@ export const PRODUCTS = [
         "id": "shirt2",
         "title": "poser",
         "category": "shirts",
-        "priceCents": 3600,
+        "priceCents": 3300,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00001.webp",
         "colorIds": [
             "snow",
             "pink",
@@ -221,120 +221,120 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00001.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00001.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00001.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00003.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00003.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00003.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00003.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00013.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00013.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00005.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00005.webp"
             },
             {
                 "color": "red",
                 "colorLabel": "red",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00007.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00007.webp"
             },
             {
                 "color": "red",
                 "colorLabel": "red",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00007.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00007.webp"
             },
             {
                 "color": "brown",
                 "colorLabel": "brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00009.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00009.webp"
             },
             {
                 "color": "brown",
                 "colorLabel": "brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00009.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/poser/EC_poser00009.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00011.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00011.webp"
             },
             {
                 "color": "dark-purple",
                 "colorLabel": "dark purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00015.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00015.webp"
             },
             {
                 "color": "dark-blue",
                 "colorLabel": "dark blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00017.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00017.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00019.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00019.webp"
             },
             {
                 "color": "dark-grey",
                 "colorLabel": "dark grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00021.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /poser/SW_poser00021.webp"
             }
         ]
     },
@@ -342,14 +342,14 @@ export const PRODUCTS = [
         "id": "shirt3",
         "title": "adrien brody",
         "category": "shirts",
-        "priceCents": 3600,
+        "priceCents": 3300,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00001.webp",
         "colorIds": [
             "snow",
             "pink",
@@ -369,80 +369,80 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00001.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/adrien brody/EC_adrienbrody00001.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/adrien brody/EC_adrienbrody00001.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00003.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00003.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/adrien brody/EC_adrienbrody00003.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/adrien brody/EC_adrienbrody00003.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00005.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00005.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/adrien brody/EC_adrienbrody00005.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/adrien brody/EC_adrienbrody00005.webp"
             },
             {
                 "color": "orange",
                 "colorLabel": "orange",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00007.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00007.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00009.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00009.webp"
             },
             {
                 "color": "black",
                 "colorLabel": "black",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00011.png"
+                "priceCents": 3300,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /adrien brody/SW_adrienbrody00011.webp"
             },
             {
                 "color": "black",
                 "colorLabel": "black",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3000,
-                "imagePath": "/assets/shop/mockups/essential cotton/adrien brody/EC_adrienbrody00007.png"
+                "priceCents": 2800,
+                "imagePath": "/assets/shop/mockups/essential cotton/adrien brody/EC_adrienbrody00007.webp"
             }
         ]
     },
@@ -450,18 +450,19 @@ export const PRODUCTS = [
         "id": "shirt4",
         "title": "stork",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00001.webp",
         "colorIds": [
             "snow",
             "pink",
             "green",
+            "black",
             "purple",
             "red",
             "blue",
@@ -480,112 +481,128 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00001.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00007.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00003.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00005.webp"
+            },
+            {
+                "color": "black",
+                "colorLabel": "black",
+                "material": "snow-washed",
+                "materialLabel": "oversized snow washed",
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00023.webp"
+            },
+            {
+                "color": "black",
+                "colorLabel": "black",
+                "material": "essential-cotton",
+                "materialLabel": "essential cotton",
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00009.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00003.webp"
             },
             {
                 "color": "red",
                 "colorLabel": "red",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00009.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00011.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00005.webp"
             },
             {
                 "color": "brown",
                 "colorLabel": "brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00017.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00017.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00021.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00021.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/storks/EC_stork00007.webp"
             },
             {
                 "color": "washed-green",
                 "colorLabel": "washed green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00015.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00015.webp"
             },
             {
                 "color": "dark-grey",
                 "colorLabel": "dark grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00019.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /storks/SW_stork00019.webp"
             }
         ]
     },
@@ -593,14 +610,14 @@ export const PRODUCTS = [
         "id": "shirt5",
         "title": "purple people eater",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00003.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00003.webp",
         "colorIds": [
             "snow",
             "black",
@@ -622,104 +639,104 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00003.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00003.webp"
             },
             {
                 "color": "black",
                 "colorLabel": "black",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00001.webp"
             },
             {
                 "color": "black",
                 "colorLabel": "black",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00001.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00005.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00007.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00009.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00009.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00009.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00011.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00007.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00015.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00015.webp"
             },
             {
                 "color": "dark-purple",
                 "colorLabel": "dark purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00013.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /ppe/SW_ppe00013.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/ppe/EC_ppe00005.webp"
             }
         ]
     },
@@ -727,14 +744,14 @@ export const PRODUCTS = [
         "id": "shirt6",
         "title": "house",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00001.webp",
         "colorIds": [
             "snow",
             "red",
@@ -754,80 +771,80 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/house1/EC_house1_00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/house1/EC_house1_00001.webp"
             },
             {
                 "color": "red",
                 "colorLabel": "red",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00003.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00005.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00007.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00009.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00011.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/house1/EC_house1_00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/house1/EC_house1_00003.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00013.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /house1/SW_house1_00013.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/house1/EC_house1_00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/house1/EC_house1_00005.webp"
             }
         ]
     },
@@ -835,14 +852,14 @@ export const PRODUCTS = [
         "id": "shirt7",
         "title": "squiggles",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /squiggles/SW_squiggles00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /squiggles/SW_squiggles00001.webp",
         "colorIds": [],
         "materialIds": [
             "snow-washed",
@@ -854,16 +871,16 @@ export const PRODUCTS = [
                 "colorLabel": "",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /squiggles/SW_squiggles00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /squiggles/SW_squiggles00001.webp"
             },
             {
                 "color": "",
                 "colorLabel": "",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/squiggles/EC_squiggles00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/squiggles/EC_squiggles00001.webp"
             }
         ]
     },
@@ -871,14 +888,14 @@ export const PRODUCTS = [
         "id": "shirt8",
         "title": "circus lion",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00001.webp",
         "colorIds": [
             "snow",
             "grey",
@@ -902,120 +919,120 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c lion/EC_clion00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c lion/EC_clion00001.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00003.webp"
             },
             {
                 "color": "brown",
                 "colorLabel": "brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00015.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00015.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00007.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c lion/EC_clion00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c lion/EC_clion00005.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00011.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00013.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00013.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c lion/EC_clion00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c lion/EC_clion00003.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00019.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00019.webp"
             },
             {
                 "color": "dark-grey",
                 "colorLabel": "dark grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00017.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00017.webp"
             },
             {
                 "color": "dark-blue",
                 "colorLabel": "dark blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00021.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00021.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00005.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c lion/EC_clion00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c lion/EC_clion00007.webp"
             },
             {
                 "color": "washed-green",
                 "colorLabel": "washed green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c lion/SW_clion00009.webp"
             }
         ]
     },
@@ -1023,14 +1040,14 @@ export const PRODUCTS = [
         "id": "shirt9",
         "title": "circus crocodile",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00001.webp",
         "colorIds": [
             "snow",
             "green",
@@ -1054,112 +1071,112 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c croc/EC_ccroc00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c croc/EC_ccroc00001.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00015.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00015.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00019.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00019.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c croc/EC_ccroc00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c croc/EC_ccroc00003.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00009.webp"
             },
             {
                 "color": "dark-grey",
                 "colorLabel": "dark grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00017.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00017.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00013.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00013.webp"
             },
             {
                 "color": "dark-blue",
                 "colorLabel": "dark blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00011.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c croc/EC_ccroc00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c croc/EC_ccroc00005.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00007.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c croc/EC_ccroc00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c croc/EC_ccroc00007.webp"
             },
             {
                 "color": "washed-green",
                 "colorLabel": "washed green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00003.webp"
             },
             {
                 "color": "washed-purple",
                 "colorLabel": "washed purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c croc/SW_ccroc00005.webp"
             }
         ]
     },
@@ -1167,14 +1184,14 @@ export const PRODUCTS = [
         "id": "shirt10",
         "title": "circus elephant",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00002.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00002.webp",
         "colorIds": [
             "snow",
             "pink",
@@ -1197,104 +1214,104 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00002.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00002.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c elephant/EC_celephant00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c elephant/EC_celephant00001.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00018.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00018.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c elephant/EC_celephant00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c elephant/EC_celephant00005.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00004.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00004.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c elephant/EC_celephant00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c elephant/EC_celephant00007.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00008.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00008.webp"
             },
             {
                 "color": "dark-blue",
                 "colorLabel": "dark blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00006.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00006.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00016.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00016.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00012.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00012.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c elephant/EC_celephant00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c elephant/EC_celephant00003.webp"
             },
             {
                 "color": "washed-green",
                 "colorLabel": "washed green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00014.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00014.webp"
             },
             {
                 "color": "dark-grey",
                 "colorLabel": "dark grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00010.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c elephant/SW_celephant00010.webp"
             }
         ]
     },
@@ -1302,14 +1319,14 @@ export const PRODUCTS = [
         "id": "shirt11",
         "title": "circus monkey",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00001.webp",
         "colorIds": [
             "snow",
             "pink",
@@ -1334,128 +1351,128 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c monkey/EC_cmonkey00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c monkey/EC_cmonkey00001.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00003.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c monkey/EC_cmonkey00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c monkey/EC_cmonkey00003.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00005.webp"
             },
             {
                 "color": "washed-green",
                 "colorLabel": "washed green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00007.webp"
             },
             {
                 "color": "washed-purple",
                 "colorLabel": "washed purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00009.webp"
             },
             {
                 "color": "dark-blue",
                 "colorLabel": "dark blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00011.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00013.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00013.webp"
             },
             {
                 "color": "dark-grey",
                 "colorLabel": "dark grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00015.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00015.webp"
             },
             {
                 "color": "brown",
                 "colorLabel": "brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00017.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00017.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00023.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00023.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c monkey/EC_cmonkey00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c monkey/EC_cmonkey00007.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00019.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00019.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00021.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c monkey/SW_cmonkey00021.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c monkey/EC_cmonkey00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c monkey/EC_cmonkey00005.webp"
             }
         ]
     },
@@ -1463,14 +1480,14 @@ export const PRODUCTS = [
         "id": "shirt12",
         "title": "circus bunny",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00001.webp",
         "colorIds": [
             "snow",
             "pink",
@@ -1493,112 +1510,112 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c bunny/EC_cbunny00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c bunny/EC_cbunny00001.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00009.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c bunny/EC_cbunny00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c bunny/EC_cbunny00003.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00015.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00015.webp"
             },
             {
                 "color": "washed-green",
                 "colorLabel": "washed green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00003.webp"
             },
             {
                 "color": "washed-purple",
                 "colorLabel": "washed purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00005.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00013.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00013.webp"
             },
             {
                 "color": "dark-grey",
                 "colorLabel": "dark grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00019.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00019.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00017.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00017.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c bunny/EC_cbunny00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c bunny/EC_cbunny00007.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00011.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c bunny/SW_cbunny00007.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c bunny/EC_cbunny00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c bunny/EC_cbunny00005.webp"
             }
         ]
     },
@@ -1606,14 +1623,14 @@ export const PRODUCTS = [
         "id": "shirt13",
         "title": "circus ensemble",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00001.webp",
         "colorIds": [
             "snow",
             "pink",
@@ -1635,88 +1652,88 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c grid/EC_cgrid00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid/EC_cgrid00001.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c grid/EC_cgrid00003.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid/EC_cgrid00003.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00007.webp"
             },
             {
                 "color": "brown",
                 "colorLabel": "brown",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00009.webp"
             },
             {
                 "color": "washed-green",
                 "colorLabel": "washed green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00003.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00013.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00013.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c grid/EC_cgrid00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid/EC_cgrid00007.webp"
             },
             {
                 "color": "grey",
                 "colorLabel": "grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00005.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid/SW_cgrid00011.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c grid/EC_cgrid00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid/EC_cgrid00005.webp"
             }
         ]
     },
@@ -1724,16 +1741,17 @@ export const PRODUCTS = [
         "id": "shirt14",
         "title": "circus outlines",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00001.webp",
         "colorIds": [
             "snow",
+            "black",
             "purple",
             "green",
             "pink",
@@ -1751,80 +1769,96 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00001.webp"
+            },
+            {
+                "color": "black",
+                "colorLabel": "black",
+                "material": "snow-washed",
+                "materialLabel": "oversized snow washed",
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00013.webp"
+            },
+            {
+                "color": "black",
+                "colorLabel": "black",
+                "material": "essential-cotton",
+                "materialLabel": "essential cotton",
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00009.webp"
             },
             {
                 "color": "purple",
                 "colorLabel": "purple",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00003.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00005.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00007.webp"
             },
             {
                 "color": "pink",
                 "colorLabel": "pink",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00007.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00007.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00009.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00009.webp"
             },
             {
                 "color": "blue",
                 "colorLabel": "blue",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00005.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00005.webp"
             },
             {
                 "color": "dark-brown",
                 "colorLabel": "dark brown",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00002.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/c grid outline/EC_cgridoutline00002.webp"
             },
             {
                 "color": "washed-grey",
                 "colorLabel": "washed grey",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00011.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /c grid outline/SW_cgridoutline00011.webp"
             }
         ]
     },
@@ -1832,14 +1866,14 @@ export const PRODUCTS = [
         "id": "shirt15",
         "title": "the essential burger",
         "category": "shirts",
-        "priceCents": 4200,
+        "priceCents": 3700,
         "sizes": [
             "S",
             "M",
             "L",
             "XL"
         ],
-        "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00001.png",
+        "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00001.webp",
         "colorIds": [
             "snow",
             "red",
@@ -1856,40 +1890,40 @@ export const PRODUCTS = [
                 "colorLabel": "snow",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00001.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00001.webp"
             },
             {
                 "color": "snow",
                 "colorLabel": "snow",
                 "material": "essential-cotton",
                 "materialLabel": "essential cotton",
-                "priceCents": 3600,
-                "imagePath": "/assets/shop/mockups/essential cotton/hamburger/EC_hamburger00001.png"
+                "priceCents": 3200,
+                "imagePath": "/assets/shop/mockups/essential cotton/hamburger/EC_hamburger00001.webp"
             },
             {
                 "color": "red",
                 "colorLabel": "red",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00005.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00005.webp"
             },
             {
                 "color": "dark-green",
                 "colorLabel": "dark green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00003.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00003.webp"
             },
             {
                 "color": "green",
                 "colorLabel": "green",
                 "material": "snow-washed",
                 "materialLabel": "oversized snow washed",
-                "priceCents": 4200,
-                "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00007.png"
+                "priceCents": 3700,
+                "imagePath": "/assets/shop/mockups/oversized snow washed /hamburger/SW_hamburger00007.webp"
             }
         ]
     },
@@ -1897,9 +1931,9 @@ export const PRODUCTS = [
         "id": "print1",
         "title": "Cyanotype",
         "category": "prints",
-        "priceCents": 1500,
+        "priceCents": 0,
         "sizes": [],
-        "imagePath": "/assets/GalleryAssets/visual-art/ArtPiece.png",
+        "imagePath": "/assets/shop/prints/cyanotype.webp",
         "colorIds": [],
         "materialIds": [],
         "variants": []
@@ -1908,51 +1942,29 @@ export const PRODUCTS = [
         "id": "print2",
         "title": "Linoprint",
         "category": "prints",
-        "priceCents": 1500,
+        "priceCents": 0,
         "sizes": [],
-        "imagePath": "",
+        "imagePath": "/assets/shop/prints/house linoprint square.webp",
         "colorIds": [],
         "materialIds": [],
         "variants": []
     },
     {
-        "id": "Digital Print",
-        "title": "Print 3",
+        "id": "print3",
+        "title": "Digital Print",
         "category": "prints",
-        "priceCents": 1500,
+        "priceCents": 0,
         "sizes": [],
-        "imagePath": "",
+        "imagePath": "/assets/GalleryAssets/visual-art/IMG_0818.webp",
         "colorIds": [],
         "materialIds": [],
         "variants": []
     },
     {
         "id": "more1",
-        "title": "bbb",
+        "title": "nothing",
         "category": "more",
-        "priceCents": 1000,
-        "sizes": [],
-        "imagePath": "/assets/images/Package.png",
-        "colorIds": [],
-        "materialIds": [],
-        "variants": []
-    },
-    {
-        "id": "more2",
-        "title": "aaa",
-        "category": "more",
-        "priceCents": 1000,
-        "sizes": [],
-        "imagePath": "",
-        "colorIds": [],
-        "materialIds": [],
-        "variants": []
-    },
-    {
-        "id": "more3",
-        "title": "More 3",
-        "category": "more",
-        "priceCents": 1000,
+        "priceCents": 0,
         "sizes": [],
         "imagePath": "",
         "colorIds": [],

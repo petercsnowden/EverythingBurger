@@ -42,7 +42,7 @@
 
     function framesToPaths(base, folder, prefix, stem, frames, width) {
         return (frames || []).map(function (frame) {
-            return base + folder + "/" + prefix + stem + padFrame(frame, width) + ".png";
+            return base + folder + "/" + prefix + stem + padFrame(frame, width) + ".webp";
         });
     }
 

@@ -118,6 +118,10 @@ body {
     display: none;
 }
 
+.about-info-mobile2 {
+    display: none;
+}
+
 .about-info2-wrap {
     position: absolute;
     left: var(--info2-left);
@@ -256,9 +260,14 @@ body {
         --info-left: -5vw;
         --info-top: 33vw;
 
+        --info-mobile2-width: 88vw;
+        --info-mobile2-left: 6vw;
+        --info-mobile2-top: 105vh;
+        --info-mobile2-height: calc(var(--info-mobile2-width) * 1074 / 1660);
+
         --info2-width: 88vw;
         --info2-left: 6vw;
-        --info2-top: 130vh;
+        --info2-top: calc(var(--info-mobile2-top) + var(--info-mobile2-height) + var(--mobile-gap));
 
         --shadow-star-width: 50vw;
         --shadow-star-left: calc(var(--info2-left) + var(--info2-width) - var(--shadow-star-width));
@@ -281,6 +290,16 @@ body {
 
     .about-info--mobile {
         display: block;
+    }
+
+    .about-info-mobile2 {
+        position: absolute;
+        left: var(--info-mobile2-left);
+        top: var(--info-mobile2-top);
+        width: var(--info-mobile2-width);
+        height: auto;
+        display: block;
+        z-index: 2;
     }
 
   .swiggle {
