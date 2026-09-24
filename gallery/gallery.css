@@ -431,11 +431,8 @@ body {
     right: max(3vw, env(safe-area-inset-right, 0px));
     bottom: max(3vw, env(safe-area-inset-bottom, 0px));
     z-index: 2;
-    width: min(18vw, 5.5rem);
+    width: clamp(5.5rem, 16vw, 11rem);
     height: auto;
-    max-height: 12vw;
-    aspect-ratio: 1092 / 768;
-    object-fit: contain;
     pointer-events: none;
     user-select: none;
 }
@@ -498,7 +495,7 @@ body {
 
         /* Mobile footer — clear the doodle (ends ~142vw), same scale as shop */
         --footer-top: 150vw;
-        --footer-height: 66vw;
+        --footer-height: 65vw;
         --footer-title-size: 9vw;
         --footer-text-size: 3.5vw;
         --footer-circles-size: 14vw;
